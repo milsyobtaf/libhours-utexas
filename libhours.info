@@ -1,0 +1,3 @@
+name = Libhours
+description = A module that will display Libraries hours.
+core = 6.x

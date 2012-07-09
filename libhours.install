@@ -1,0 +1,229 @@
+<?php
+
+/**
+ * @file
+ * Install, Uninstalls Schema for lib hours module
+ *
+ * @author Sean Watkins <slwatkins@uh.edu>
+ * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
+ */
+
+/**
+ * Implements hook_install().
+ */
+function libhours_install() {
+  drupal_install_schema('libhours');
+
+  /* pre-populate the semesters and type tables.
+     need to check if the table already has something in there to avoid
+     overwrites or duplicates that can happen when enabling/disabling the
+     module.
+  */
+  if (!db_result(db_query("SELECT COUNT(1) FROM {libhours_semesters} WHERE TRUE"))) {
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Fall');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Spring');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Summer');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Finals');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Winter Break');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Spring Break');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Intersession');
+  }
+
+  if (!db_result(db_query("SELECT COUNT(1) FROM {libhours_type} WHERE TRUE"))) {
+    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Holiday');
+    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Emergency');
+    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Unexpected');
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function libhours_uninstall() {
+  drupal_uninstall_schema('libhours');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function libhours_schema() {
+  $schema['libhours_locations'] = array(
+    'description' => 'Library Locations',
+    'fields' => array(
+      'lid' => array(
+        'description' => 'unique identifier for locations',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'name' => array(
+        'description' => 'name of location',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => ''),
+      'description' => array(
+        'description' => 'location description text',
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+        'default' => ''),
+      'parent' => array(
+        'description' => 'parent location lid identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0),
+    ),
+    'primary key' => array('lid'),
+  );
+
+  $schema['libhours_periods'] = array(
+    'description' => 'Location periods',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'unique identifier for periods',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'lid' => array(
+        'description' => 'foreign key to locations identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'sid' => array(
+        'description' => 'foreign key to semester identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'from_date' => array(
+        'description' => 'periods start date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'to_date' => array(
+        'description' => 'periods end date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+    ),
+    'primary key' => array('pid'),
+  );
+
+  $schema['libhours_semesters'] = array(
+    'description' => 'Semesters for a period',
+    'fields' => array(
+      'sid' => array(
+        'description' => 'unique identifier for semesters',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'name' => array(
+        'description' => 'semester name',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => ''),
+    ),
+    'primary key' => array('sid'),
+  );
+
+  $schema['libhours_hours'] = array(
+    'description' => 'Period hours of operation',
+    'fields' => array(
+      'hid' => array(
+        'description' => 'unique identifier for hours',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'pid' => array(
+        'description' => 'foreign key to periods identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'dow' => array(
+        'description' => 'Days of week binary string',
+        'type' => 'varchar',
+        'length' => 7,
+        'not null' => TRUE,
+        'default' => '1111111'),
+      'open' => array(
+        'description' => 'The hour the location opens. Open 24hours is when open is 0 and close is 2400. Close 24hours is when open and close are 0',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'close' => array(
+        'description' => 'The hour the location closes',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+    ),
+    'primary key' => array('hid'),
+  );
+
+  $schema['libhours_exceptions'] = array(
+    'description' => 'Exceptions for locations',
+    'fields' => array(
+      'eid' => array(
+        'description' => 'unique identifier for exceptions',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'lid' => array(
+        'description' => 'foreign key to location identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'tid' => array(
+        'description' => 'foreign key to type identifier',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'label' => array(
+        'description' => 'exception description label',
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+        'default' => ''),
+      'from_date' => array(
+        'description' => 'exception start date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'to_date' => array(
+        'description' => 'exception end date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'open' => array(
+        'description' => 'The hour the location opens. Open 24hours is when open is 0 and close is 2400. Close 24hours is when open and close are 0',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'close' => array(
+        'description' => 'The hour the location closes',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+    ),
+    'primary key' => array('eid'),
+  );
+
+  $schema['libhours_type'] = array(
+    'description' => 'Exception type identifier',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'unique identifier for exception type',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE),
+      'name' => array(
+        'description' => 'type name',
+        'type' => 'varchar',
+        'length' => 100,
+        'default' => ''),
+    ),
+    'primary key' => array('tid'),
+  );
+
+  return $schema;
+}
