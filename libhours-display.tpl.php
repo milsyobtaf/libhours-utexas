@@ -24,7 +24,7 @@
 			<?php foreach($locations as $location): ?>
 				<li class="libhours-location <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>" onclick="javascript:libhours.location('<?php echo $location['lid'] ?>')"><?php echo $location['name'] ?></li>
 				<?php foreach($location['children'] as $child): ?>
-					<li class="libhours-location libhours-child <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>" onclick="javascript:libhours.location('<?php echo $child['lid'] ?>')">- <?php echo $child['name'] ?></li>
+					<li class="libhours-location libhours-child <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>" onclick="javascript:libhours.location('<?php echo $child['lid'] ?>')"><?php echo $child['name'] ?></li>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
 		</ul>
@@ -64,7 +64,10 @@
 				</div>
 				<?php endif; ?>
 				<div class="libhours-locationdescription"><?php echo $description ?></div>
-				<div class="libhours-disclaimer"><?php echo t('Library hours are subject to change') ?></div>
+				<div class="libhours-disclaimer">
+					<?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?><br />
+					<?php echo t('Hours are subject to change without notice.') ?>
+				</div>
 			</div>
 		<?php endforeach; ?>
 	</div>

@@ -51,8 +51,8 @@
   color: #efefef;
   margin: 2px 0;
 }
-#libhours-locations #libhours-location-list .libhours-location.selected:hover {
-}
+#libhours-locations #libhours-location-list .libhours-location.selected:hover 
+{}
 #libhours-locations #libhours-location-list .libhours-location.libhours-child {
   padding-left: 15px;
   width: 92%;
