@@ -6,6 +6,12 @@
  * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
  */
 
+/* Garland Theme Specific Hack */
+
+#libhours-content ul li {
+  background: none;
+}
+
 .libhours-dow-checkboxes {
   display: inline-block;
   width: 100%;
