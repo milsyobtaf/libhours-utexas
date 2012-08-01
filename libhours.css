@@ -137,7 +137,8 @@
   float: left;
   min-height: 275px;
   padding: 20px;
-  width: 648px;
+  width: 95%;
+  min-width: 650px;
   -moz-border-radius: 5px;
   -moz-border-radius-topleft: 0;
   -moz-box-shadow: 2px 2px .5em #d9d9d9;
@@ -228,5 +229,5 @@
   float: left;
   font-size: 12px;
   padding-top: 10px;
-  width: 660px;
+  width: 100%;
 }
