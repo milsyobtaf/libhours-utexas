@@ -21,18 +21,18 @@ function libhours_install() {
   */
   if (!db_result(db_query("SELECT COUNT(1) FROM {libhours_semesters} WHERE TRUE"))) {
     db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Fall');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Thanksgiving');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Winter Intersession');
     db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Spring');
-    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Summer');
-    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Finals');
-    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Winter Break');
     db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Spring Break');
-    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Intersession');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Spring Intersession');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Summer');
+    db_query("INSERT INTO {libhours_semesters} (name) VALUES ('%s')", 'Summer Intersession');
   }
 
   if (!db_result(db_query("SELECT COUNT(1) FROM {libhours_type} WHERE TRUE"))) {
-    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Holiday');
+    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Planned');
     db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Emergency');
-    db_query("INSERT INTO {libhours_type} (name) VALUES ('%s')", 'Unexpected');
   }
 }
 
