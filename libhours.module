@@ -482,6 +482,30 @@ function _libhours_displayhours($open, $close, $prev = NULL, $next = NULL) {
   elseif ($open == 0 && $close == 0) {
     $r = t('Closed');
   }
+  elseif ($open == 0) {
+    $r = t('Midnight - @closetime', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($open == 1200) {
+    $r = t('Noon - @closetime', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($close == 0) {
+    $r = t('@opentime - Midnight', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($close == 1200) {
+    $r = t('@opentime - Noon', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
   else {
     $r = t('@opentime - @closetime', array(
       '@opentime' => $openstr,

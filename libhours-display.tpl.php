@@ -44,7 +44,14 @@
 					<div class="libhours-name"><?php echo $period['name'] ?> Hours</div>
 					<ul>
 						<?php for($i = 0; $i < count($period['hours']); $i++): ?>
-							<li class="libhours-hour"><div class="libhours-dow"><?php echo _libhours_dow($i) ?>:</div><div class="libhours-time"><?php echo $period['hours'][$i] ?></div></li>
+							<li class="libhours-hour">
+							  <div class="libhours-dow">
+							    <?php echo _libhours_dow($i) ?>:
+							  </div>
+							  <div class="libhours-time">
+							    <?php echo $period['hours'][$i] ?>
+							  </div>
+							</li>
 						<?php endfor; ?>
 					</ul>
 				</div>
