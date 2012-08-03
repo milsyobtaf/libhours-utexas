@@ -772,7 +772,7 @@ function libhours_admin_exceptions_form(
     '#value' => $lid,
   );
 
-  $rs = db_query("SELECT * FROM {libhours_type} WHERE TRUE ORDER BY name");
+  $rs = db_query("SELECT * FROM {libhours_type} WHERE TRUE ORDER BY tid");
   $types = array();
   while ($row = db_fetch_object($rs)) {
       $types[$row->tid] = $row->name;
