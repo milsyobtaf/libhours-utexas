@@ -321,7 +321,7 @@ function template_preprocess_hours_display(&$variables) {
 
   /* Load up the available locations */
   $variables['locations'] = array();
-  $lrs = db_query("SELECT * FROM {libhours_locations} WHERE parent=0 ORDER BY name ASC");
+  $lrs = db_query("SELECT * FROM {libhours_locations} WHERE parent=0 ORDER BY lid ASC");
   while ($row = db_fetch_object($lrs)) {
     $children = array();
     $crs = db_query("SELECT * FROM {libhours_locations} WHERE parent=%d ORDER BY name ASC", $row->lid);
