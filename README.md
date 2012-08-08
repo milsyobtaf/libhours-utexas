@@ -16,7 +16,8 @@ Multiple changes were made to better suit our needs, which are enumerated below.
 * Modified the .module time pre-process function to display Noon and Midnight when opening or closing times equaled 1200 or 0, resepectively, for clarity.
 
 * Modified libhours_type db table to have only two exceptions, Planned and Emergency.  Modified the .module file to have two Exceptions output loops, one for emergencies and one for planned.  This allowed for theming hooks to be inserted into the Emergency exceptions.  This modification also involved the .tpl.php and .css files.
-** Emergency exceptions MUST be of TID 2 to work properly with this modified .module file.
+
+- Emergency exceptions MUST be of TID 2 to work properly with this modified .module file.
 
 * Modified the .install file to reflect our needed Period names in the libhours_semesters table.
 
