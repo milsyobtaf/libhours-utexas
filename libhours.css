@@ -57,7 +57,7 @@
   color: #efefef;
   margin: 2px 0;
 }
-#libhours-locations #libhours-location-list .libhours-location.selected:hover 
+#libhours-locations #libhours-location-list .libhours-location.selected:hover
 {}
 #libhours-locations #libhours-location-list .libhours-location.libhours-child {
   padding-left: 15px;
@@ -213,6 +213,11 @@
   font-weight: bold;
   text-transform: uppercase;
   width: 290px;
+}
+#libhours-periods .libhours-exceptions .libhours-hour .libhours-emergency span {
+  background-color: red;
+  padding: 3px 5px;
+  border-radius: 3px;
 }
 #libhours-periods .libhours-exceptions .libhours-hour .libhours-time {
   padding-left: 10px;
