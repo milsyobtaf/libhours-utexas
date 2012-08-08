@@ -337,7 +337,7 @@ function template_preprocess_hours_display(&$variables) {
 
   /* Load the next 4 periods */
   $variables['periods'] = array();
-  $rs = db_query_range("SELECT *, s.name FROM {libhours_periods} p 
+  $rs = db_query_range("SELECT *, s.name FROM {libhours_periods} p
                       INNER JOIN {libhours_semesters} s ON p.sid = s.sid
                   WHERE lid = %d AND %d <= to_date ORDER BY from_date ASC", $lid, $today, $today, 0, 4);
   while ($period = db_fetch_object($rs)) {
@@ -360,7 +360,7 @@ function template_preprocess_hours_display(&$variables) {
 
     /* Load the exceptions within the period */
     $vexceptions = array();
-    $ers = db_query("SELECT * FROM {libhours_exceptions} WHERE lid=%d AND from_date >= %d AND to_date <= %d AND %d <= to_date ORDER BY from_date ASC", $lid, $period->from_date, $period->to_date, $today);
+    $ers = db_query("SELECT * FROM {libhours_exceptions} WHERE tid != 2 AND lid=%d AND from_date >= %d AND to_date <= %d AND %d <= to_date ORDER BY from_date ASC", $lid, $period->from_date, $period->to_date, $today);
     $exceptions = array();
     /* Gather together all the exceptions with the same label */
     while ($exception = db_fetch_object($ers)) {
@@ -377,7 +377,23 @@ function template_preprocess_hours_display(&$variables) {
     foreach ($exceptions as $label => $times) {
       $vexceptions[] = array('name' => check_plain($label), 'times' => $times);
     }
+    $emerrs = db_query("SELECT * FROM {libhours_exceptions} WHERE tid = 2 AND lid=%d AND from_date >= %d AND to_date <= %d AND %d <= to_date ORDER BY from_date ASC", $lid, $period->from_date, $period->to_date, $today);
+    $emerexceptions = array();
+    /* Gather together all the exceptions with the same label */
+    while ($emerexception = db_fetch_object($emerrs)) {
+      if (date("n/d/Y", $emerexception->from_date) == date("n/d/Y", $emerexception->to_date)) {
+        $date = date("l: M j", $emerexception->from_date);
+      }
+      else {
+        $date = date("M j", $emerexception->from_date) . ' - ' . date("M j", $emerexception->to_date);
+      }
 
+      $emerexceptions[strtoupper($emerexception->label)][] = $date . ', ' . _libhours_displayhours($emerexception->open, $emerexception->close);
+    }
+    /* Load all the sorted exceptions for displaying  */
+    foreach ($emerexceptions as $label => $times) {
+      $vemerexceptions[] = array('name' => check_plain($label), 'times' => $times);
+    }
     $variables['periods'][] = array(
       'pid' => $period->pid,
       'name' => check_plain($period->name),
@@ -385,6 +401,7 @@ function template_preprocess_hours_display(&$variables) {
       'to_date' => $period->to_date,
       'hours' => $display_hours,
       'exceptions' => $vexceptions,
+      'emerexceptions' => $vemerexceptions,
     );
   }
 }
