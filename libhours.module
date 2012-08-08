@@ -499,7 +499,22 @@ function _libhours_displayhours($open, $close, $prev = NULL, $next = NULL) {
   elseif ($open == 0 && $close == 0) {
     $r = t('Closed');
   }
-  elseif ($open == 0) {
+/* Begin special cases for Noon and Midnight to avoid confusion */  
+/* Begin two very specific time declaration to get around a bug caused by the $open and $close both equaling special cases */
+  elseif ($open == 1200 && $close == 0) {
+   $r = t('Noon - Midnight', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    )); 
+ }
+  elseif ($open == 0 && $close == 1200) {
+   $r = t('Midnight - Noon', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    )); 
+ }
+/* End two very specific time declaration to get around a bug caused by the $open and $close both equaling special cases */
+ elseif ($open == 0) {
     $r = t('Midnight - @closetime', array(
       '@opentime' => $openstr,
       '@closetime' => $closestr,
@@ -523,6 +538,7 @@ function _libhours_displayhours($open, $close, $prev = NULL, $next = NULL) {
       '@closetime' => $closestr,
     ));
   }
+/* End special cases for Noon and Midnight to avoid confusion */
   else {
     $r = t('@opentime - @closetime', array(
       '@opentime' => $openstr,
