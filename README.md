@@ -7,19 +7,21 @@ This is a heavily modified version of Sean Watkins' Libhours-2.x module, whose o
 
 Multiple changes were made to better suit our needs, which are enumerated below.
 
-* On a purely presentational level, removed the use of the libhours-location-arrow.png file due to several of our locations having long names that exceeded the dimensions of this file, and changed the base colors to reflect university colors.
+- On a purely presentational level, removed the use of the libhours-location-arrow.png file, and deleted the file and its img folder, due to several of our locations having long names that exceeded the dimensions of this file, and changed the base colors to reflect university colors.
 
-* Modified many dimensions in the .css file from px to percentages to allow a more flexible layout.
+- Modified many dimensions in the .css file from px to percentages to allow a more flexible layout.
 
-* Modified the .module to sort the list of locations by LID rather than Name, allowing our flagship branch, the Perry-Casta&#241;eda Library, to appear at the top of the list without making db modifications.
+- Modified the .module to sort the list of locations by LID rather than Name, allowing our flagship branch, the Perry-Casta&#241;eda Library, to appear at the top of the list without making db modifications.
 
-* Modified the .module time pre-process function to display Noon and Midnight when opening or closing times equaled 1200 or 0, resepectively, for clarity.
+	- This of course means that you have to either enter the locations in your desired order, or go back and modify their LID directly in the db
 
-* Modified libhours_type db table to have only two exceptions, Planned and Emergency.  Modified the .module file to have two Exceptions output loops, one for emergencies and one for planned.  This allowed for theming hooks to be inserted into the Emergency exceptions.  This modification also involved the .tpl.php and .css files.
+- Modified the .module time pre-process function to display Noon and Midnight when opening or closing times equaled 1200 or 0, resepectively, for clarity.
 
-	* Emergency exceptions MUST be of TID 2 to work properly with this modified .module file.
+- Modified libhours_type db table to have only two exceptions, Planned and Emergency.  Modified the .module file to have two Exceptions output loops, one for emergencies and one for planned.  This allowed for theming hooks to be inserted into the Emergency exceptions.  This modification also involved the .tpl.php and .css files.
 
-* Modified the .install file to reflect our needed Period names in the libhours_semesters table.
+	- Emergency exceptions MUST be of TID 2 to work properly with this modified .module file.
+
+- Modified the .install file to reflect our needed Period names in the libhours_semesters table.
 
 Lib Hours 2.x for Drupal 6.x
 ----------------------------
