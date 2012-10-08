@@ -38,6 +38,9 @@
         </li>
       <?php endforeach; ?>
     </ul>
+    <div id="libhours-location-name">
+	    <?php echo $location['name'] ?>
+	</div>
     <?php foreach($periods as $period): ?>
       <div id="libhours-period-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : '') ?>">
         <div class="libhours-stdhours">
