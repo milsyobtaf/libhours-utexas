@@ -317,8 +317,13 @@ function template_preprocess_hours_display(&$variables) {
 
   /* Used when displaying the periods for the location */
   $location = db_fetch_object(db_query("SELECT * FROM {libhours_locations} WHERE lid=%d", $lid));
-  $variables['description'] = check_plain($location->description);
-
+  $variables['description'] = check_markup($location->description);
+/*   
+ * Changed this line to allow for markup in descriptions instead of plain text
+ *	$variables['description'] = $location->description; 
+ *	
+*/
+  
   /* Load up the available locations */
   $variables['locations'] = array();
   $lrs = db_query("SELECT * FROM {libhours_locations} WHERE parent=0 ORDER BY lid ASC");
