@@ -29,11 +29,14 @@
       <?php endforeach; ?>
     </ul>
   </div>
+<!--
   <div id="libhours-location-name">
     <?php foreach($locations as $location): ?>
-	  <?php echo (($location['lid'] == $lid) ? $location['name'] : '') ?>
+	  <?php echo (($location['lid'] == $lid) ? '<p>' . $location['name'] . '</p>' : '') ?>
     <?php endforeach; ?>
+    <?php echo (($child['lid'] == $lid) ? '<p>' . $child['name'] . '</p>' : '') ?>
   </div>
+-->
   <div id="libhours-periods">
     <ul id="libhours-periods-tabs">
       <?php foreach($periods as $period): ?>
@@ -46,7 +49,13 @@
     <?php foreach($periods as $period): ?>
       <div id="libhours-period-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : '') ?>">
         <div class="libhours-stdhours">
-          <div class="libhours-name"><?php echo $period['name'] ?> Hours</div>
+          <div class="libhours-name">
+	          <?php foreach($locations as $location): ?>
+	          	<?php echo (($location['lid'] == $lid) ? '<p class="libhours-location-name">' . $location['name'] . '</p>' : '') ?>
+	          <?php endforeach; ?>
+	          <?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name">' . $child['name'] . '</p>' : '') ?>
+	          <p class="libhours-period-name"><?php echo $period['name'] ?>&nbsp;Hours</p>
+	      </div>
           <ul>
             <?php for($i = 0; $i < count($period['hours']); $i++): ?>
               <li class="libhours-hour">

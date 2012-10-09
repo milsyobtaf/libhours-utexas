@@ -57,8 +57,7 @@
   color: #efefef;
   margin: 2px 0;
 }
-#libhours-locations #libhours-location-list .libhours-location.selected:hover
-{}
+#libhours-locations #libhours-location-list .libhours-location.selected:hover {}
 #libhours-locations #libhours-location-list .libhours-location.libhours-child {
   padding-left: 15px;
   width: 92%;
@@ -162,10 +161,19 @@
 }
 #libhours-periods .libhours-stdhours .libhours-name {
   background-color: #efefef;
+  background-color: #cdcdcd;
   color: #000;
   font-size: 1.5em;
   font-weight: bold;
-  padding: 5px 5px 5px 7px;
+  padding: 3px;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-period-name {
+  padding: 2px;
+  margin: 0;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-name {
+  padding: 2px;
+  margin: 0;
 }
 #libhours-periods .libhours-stdhours .libhours-hour {
   float: left;
