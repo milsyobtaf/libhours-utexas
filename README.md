@@ -12,13 +12,11 @@ Multiple changes were made to better suit our needs, which are enumerated below.
 - Modified many dimensions in the .css file from px to percentages to allow a more flexible layout.
 
 - Modified the .module to sort the list of locations by LID rather than Name, allowing our flagship branch, the Perry-Casta&#241;eda Library, to appear at the top of the list without making db modifications.
-
 	- This of course means that you have to either enter the locations in your desired order, or go back and modify their LID directly in the db
 
 - Modified the .module time pre-process function to display Noon and Midnight when opening or closing times equaled 1200 or 0, resepectively, for clarity.
 
 - Modified libhours_type db table to have only two exceptions, Planned and Emergency.  Modified the .module file to have two Exceptions output loops, one for emergencies and one for planned.  This allowed for theming hooks to be inserted into the Emergency exceptions.  This modification also involved the .tpl.php and .css files.
-
 	- Emergency exceptions MUST be of TID 2 to work properly with this modified .module file.
 
 - Modified the .install file to reflect our needed Period names in the libhours_semesters table.
