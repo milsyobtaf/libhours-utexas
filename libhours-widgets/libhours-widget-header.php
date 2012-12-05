@@ -104,5 +104,5 @@ if ($decodedhoursjson["status"] === 'ok'){
 	}
 }
 
-echo "<div" . $libhoursstyle . " id='libhours-header-widget'><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'><span id='libhours-header-widget-clockicon'>[</span>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
+echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
 ?>
