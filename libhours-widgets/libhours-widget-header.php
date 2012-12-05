@@ -71,11 +71,8 @@ $apiurl = "http://drupal.lib.utexas.edu/hours/api?";
 /* JSON Retrieval Variables */
 $hoursurl = $apiurl . $apiformat . $apihourslocation . $apihoursaction;
 $openurl = $apiurl . $apiformat . $apiopenaction;
-/*
-$hoursjsonfile = file_get_contents($hoursurl);
-$openjsonfile = file_get_contents($openurl);
-*/
 
+/* Retrieve JSON */
 $hoursjsonfile = get_content($hoursurl);
 $openjsonfile = get_content($openurl);
 
