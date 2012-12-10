@@ -56,6 +56,9 @@ function get_content($URL){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_URL, $URL);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 4);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+	curl_setopt($ch, CURLOPT_FAILONERROR, true);
 	$data = curl_exec($ch);
 	curl_close($ch);
 	return $data;
@@ -71,11 +74,8 @@ $apiurl = "http://drupal.lib.utexas.edu/hours/api?";
 /* JSON Retrieval Variables */
 $hoursurl = $apiurl . $apiformat . $apihourslocation . $apihoursaction;
 $openurl = $apiurl . $apiformat . $apiopenaction;
-/*
-$hoursjsonfile = file_get_contents($hoursurl);
-$openjsonfile = file_get_contents($openurl);
-*/
 
+/* Retrieve JSON */
 $hoursjsonfile = get_content($hoursurl);
 $openjsonfile = get_content($openurl);
 
@@ -104,5 +104,5 @@ if ($decodedhoursjson["status"] === 'ok'){
 	}
 }
 
-echo "<div" . $libhoursstyle . " id='libhours-header-widget'><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'><span id='libhours-header-widget-clockicon'>[</span>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
+echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
 ?>
