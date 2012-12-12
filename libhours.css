@@ -167,14 +167,19 @@
   padding: 3px;
   line-height: normal;
 }
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-name {
+  padding: 2px;
+  margin: 0;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-childname {
+  padding: 2px;
+  margin: 0;
+  font-size: .9em;
+}
 #libhours-periods .libhours-stdhours .libhours-name p.libhours-period-name {
   padding: 2px;
   margin: 0;
   font-weight: normal;
-}
-#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-name {
-  padding: 2px;
-  margin: 0;
 }
 #libhours-periods .libhours-stdhours .libhours-hour {
   float: left;
