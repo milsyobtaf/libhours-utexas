@@ -1,0 +1,253 @@
+/**
+ * @file
+ * CSS styles for lib hours - UT Austin modification
+ *
+ * @author Sean Watkins <slwatkins@uh.edu>
+ * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
+ */
+
+/* Garland Theme Specific Hack */
+
+#libhours-content ul li {
+  background: none;
+}
+
+.libhours-dow-checkboxes {
+  display: inline-block;
+  width: 100%;
+}
+.libhours-dow-checkboxes .form-checkboxes {
+  float: left;
+}
+.libhours-dow-checkboxes .form-checkboxes .form-option {
+  float: left;
+  width: 100px;
+}
+#libhours-content {
+  float: left;
+  width: 100%;
+}
+#libhours-locations {
+  float: left;
+  padding-right: 0px;
+  width: 25%;
+  display: none;
+}
+#libhours-locations #libhours-location-list {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#libhours-locations #libhours-location-list .libhours-location {
+  cursor: pointer;
+  overflow: hidden;
+  padding: 3px 0px 4px 7px;
+  text-overflow: ellipsis;
+  white-space: none;
+  border-radius: 5px;
+  width: 95%;
+  font-weight: bold;
+}
+#libhours-locations #libhours-location-list .libhours-location:hover {
+  color: #efefef;
+  background-color: #777;
+}
+#libhours-locations #libhours-location-list .libhours-location.selected {
+  background-color: #cc5500;
+  color: #efefef;
+  margin: 2px 0;
+}
+#libhours-locations #libhours-location-list .libhours-location.selected:hover {}
+#libhours-locations #libhours-location-list .libhours-location.libhours-child {
+  padding-left: 15px;
+  width: 92%;
+  font-weight: normal;
+}
+#libhours-periods {
+  float: left;
+  width: 75%;
+}
+#libhours-periods-tabs {
+  cursor: pointer;
+  float: left;
+  list-style: none;
+  margin: 0 0 0 10px;
+  padding: 0;
+}
+#libhours-periods-tabs li {
+  background-color: #f9f9f9;
+  border-left: 1px solid #bababa;
+  border-right: 1px solid #bababa;
+  border-top: 1px solid #bababa;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #000;
+  float: left;
+  padding: 5px;
+  width: 100px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+}
+#libhours-periods-tabs li:hover {
+  background-color: #efefef;
+}
+#libhours-periods-tabs li.selected {
+  background-color: #cc5500;
+  background-image: -moz-linear-gradient(top, #ee6300, #cc5500);
+  background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #ee6300), color-stop(1, #cc5500));
+  border-left: 1px solid #cc5500;
+  border-right: 1px solid #cc5500;
+  border-top: 1px solid #cc5500;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0px -1px 0px #cc5500;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ee6300', EndColorStr='#cc5500')";
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+}
+#libhours-periods-tabs li.selected:hover {
+  background-color: #c00;
+}
+#libhours-periods-tabs li .libhours-name {
+  font-size: .9em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+#libhours-periods-tabs li .libhours-daterange {
+  font-size: .9em;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center;
+}
+#libhours-periods .libhours-view {
+  background-color: #fff;
+  border: 1px solid #cc5500;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  box-shadow: 2px 2px .5em #d9d9d9;
+  display: none;
+  float: left;
+  min-height: 275px;
+  padding: 20px;
+  width: 95%;
+  min-width: 650px;
+  -moz-border-radius: 5px;
+  -moz-border-radius-topleft: 0;
+  -moz-box-shadow: 2px 2px .5em #d9d9d9;
+  -webkit-border-radius: 5px;
+  -webkit-border-top-left-radius: 0;
+  -webkit-box-shadow: 2px 2px .5em #d9d9d9;
+}
+#libhours-periods .libhours-view.selected {
+  display: inline;
+}
+#libhours-periods .libhours-stdhours {
+  float: left;
+  min-height: 165px;
+  width: 330px;
+}
+#libhours-periods .libhours-stdhours ul {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#libhours-periods .libhours-stdhours .libhours-name {
+  background-color: #efefef;
+  color: #000;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 3px;
+  line-height: normal;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-name {
+  padding: 2px;
+  margin: 0;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-childname {
+  padding: 2px;
+  margin: 0;
+  font-size: .9em;
+}
+#libhours-periods .libhours-stdhours .libhours-name p.libhours-period-name {
+  padding: 2px;
+  margin: 0;
+  font-weight: normal;
+}
+#libhours-periods .libhours-stdhours .libhours-hour {
+  float: left;
+  width: 330px;
+}
+#libhours-periods .libhours-stdhours .libhours-hour .libhours-dow {
+  float: left;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 4px;
+  width: 129px;
+}
+#libhours-periods .libhours-stdhours .libhours-hour .libhours-time {
+  color: #666;
+  float: left;
+  font-size: 1.2em;
+  padding: 4px;
+  width: 177px;
+}
+#libhours-periods .libhours-exceptions {
+  background-color: #f9f9f9;
+  border: 1px solid #999;
+  color: #333;
+  float: right;
+  line-height: 1.5em;
+  width: 300px;
+}
+#libhours-periods .libhours-exceptions .libhours-name {
+  background-color: #999;
+  color: #fff;
+  font-size: 1.4em;
+  font-weight: normal;
+  margin-bottom: 5px;
+  padding: 3px 3px 8px 13px;
+}
+#libhours-periods .libhours-exceptions .libhours-hour {
+  padding: 4px 4px 10px 13px;
+}
+#libhours-periods .libhours-exceptions .libhours-hour ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#libhours-periods .libhours-exceptions .libhours-hour .libhours-label {
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 290px;
+}
+#libhours-periods .libhours-exceptions .libhours-hour .libhours-emergency span {
+  background-color: red;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+#libhours-periods .libhours-exceptions .libhours-hour .libhours-time {
+  padding: 0px 10px 3px;
+  width: 280px;
+}
+#libhours-periods .libhours-locationdescription {
+  float: left;
+  padding: 10px 0 0 0;
+  width: 640px;
+}
+#libhours-periods .libhours-disclaimer {
+  border-top: 1px solid #000;
+  bottom: 0px;
+  float: left;
+  font-size: 12px;
+  padding-top: 10px;
+  width: 100%;
+}

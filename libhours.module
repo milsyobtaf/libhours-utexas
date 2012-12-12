@@ -29,6 +29,7 @@ function libhours_help($path, $arg) {
 function libhours_init() {
   $basepath = drupal_get_path('module', 'libhours');
   drupal_add_css($basepath . '/libhours.css');
+  drupal_add_css($basepath . '/libhours-print.css', 'module', 'print');
   drupal_add_js($basepath . '/libhours.js');
 }
 
