@@ -49,6 +49,8 @@
 	          		<?php endforeach; ?>
 	          <?php endforeach; ?>
 	          <p class="libhours-period-name"><?php echo $period['name'] ?>&nbsp;Hours</p>
+	          <!-- This date range output is here strictly for print styling - it is hidden by the default view CSS -->
+	          <p class="libhours-period-name libhours-daterange"><?php echo date("F j", $period['from_date']) ?> &ndash; <?php echo date("F j", $period['to_date']) ?></p>
 	      </div>
           <ul>
             <?php for($i = 0; $i < count($period['hours']); $i++): ?>
