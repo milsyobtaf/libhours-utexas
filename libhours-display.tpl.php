@@ -32,14 +32,14 @@
   <div id="libhours-periods">
     <ul id="libhours-periods-tabs">
       <?php foreach($periods as $period): ?>
-        <li id="libhours-tab-<?php echo $period['pid'] ?>" class="<?php echo (($period['pid'] == $pid) ? 'selected' : '') ?>" onclick="javascript:libhours.tab('<?php echo $period['pid'] ?>')">
+        <li id="libhours-tab-<?php echo $period['pid'] ?>" class="<?php echo (($period['pid'] == $pid) ? 'selected' : 'deselected') ?>" onclick="javascript:libhours.tab('<?php echo $period['pid'] ?>')">
           <div class="libhours-name"><?php echo $period['name'] ?></div>
           <div class="libhours-daterange"><?php echo date("M j", $period['from_date']) ?> - <?php echo date("M j", $period['to_date']) ?></div>
         </li>
       <?php endforeach; ?>
     </ul>
     <?php foreach($periods as $period): ?>
-      <div id="libhours-period-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : '') ?>">
+      <div id="libhours-period-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : 'deselected') ?>">
         <div class="libhours-stdhours">
           <div class="libhours-name">
 	          <?php foreach($locations as $location): ?>
