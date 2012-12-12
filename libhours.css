@@ -181,6 +181,9 @@
   margin: 0;
   font-weight: normal;
 }
+p.libhours-period-name.libhours-daterange {
+	display: none;
+}
 #libhours-periods .libhours-stdhours .libhours-hour {
   float: left;
   width: 330px;
