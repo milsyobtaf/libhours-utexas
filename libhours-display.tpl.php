@@ -45,7 +45,7 @@
 	          <?php foreach($locations as $location): ?>
 	          	<?php echo (($location['lid'] == $lid) ? '<p class="libhours-location-name">' . $location['name'] . '</p>' : '') ?>
 	          		<?php foreach($location['children'] as $child): ?>
-	          			<?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name">' . $child['name'] . '</p>' : '') ?>
+	          			<?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name">'. $location['name'] . '</p><p class="libhours-location-childname">' . $child['name'] . '</p>' : '') ?>
 	          		<?php endforeach; ?>
 	          <?php endforeach; ?>
 	          <p class="libhours-period-name"><?php echo $period['name'] ?>&nbsp;Hours</p>
