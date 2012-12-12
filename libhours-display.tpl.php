@@ -29,14 +29,6 @@
       <?php endforeach; ?>
     </ul>
   </div>
-<!--
-  <div id="libhours-location-name">
-    <?php foreach($locations as $location): ?>
-	  <?php echo (($location['lid'] == $lid) ? '<p>' . $location['name'] . '</p>' : '') ?>
-    <?php endforeach; ?>
-    <?php echo (($child['lid'] == $lid) ? '<p>' . $child['name'] . '</p>' : '') ?>
-  </div>
--->
   <div id="libhours-periods">
     <ul id="libhours-periods-tabs">
       <?php foreach($periods as $period): ?>
@@ -52,8 +44,10 @@
           <div class="libhours-name">
 	          <?php foreach($locations as $location): ?>
 	          	<?php echo (($location['lid'] == $lid) ? '<p class="libhours-location-name">' . $location['name'] . '</p>' : '') ?>
+	          		<?php foreach($location['children'] as $child): ?>
+	          			<?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name">' . $child['name'] . '</p>' : '') ?>
+	          		<?php endforeach; ?>
 	          <?php endforeach; ?>
-	          <?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name">' . $child['name'] . '</p>' : '') ?>
 	          <p class="libhours-period-name"><?php echo $period['name'] ?>&nbsp;Hours</p>
 	      </div>
           <ul>
