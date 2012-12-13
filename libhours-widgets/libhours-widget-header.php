@@ -102,9 +102,9 @@ if ($decodedhoursjson["status"] === 'ok'){
 		}
 	$i++;
 	}
-	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
+	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></a></span></div>";
 } else {
-	echo "<div id='libhours-header-widget' class='libhours-header-widget-error'><span id='libhours-header-widget-clockicon'>[</span><strong><a href='http://drupal.lib.utexas.edu/hours'>Library Hours</a></strong></div>";
+	echo "<div id='libhours-header-widget' class='libhours-header-widget-error'><span id='libhours-header-widget-clockicon'>[</span><span><strong><a href='http://drupal.lib.utexas.edu/hours'>Library Hours</a></strong></span></div>";
 }
 
 
