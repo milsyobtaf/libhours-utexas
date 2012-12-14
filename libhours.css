@@ -6,7 +6,8 @@
  * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
  */
 
-/* Garland Theme Specific Hack */
+
+@media screen {
 
 #libhours-content ul li {
   background: none;
@@ -252,4 +253,5 @@ p.libhours-period-name.libhours-daterange {
   font-size: 12px;
   padding-top: 10px;
   width: 100%;
+}
 }
