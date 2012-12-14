@@ -1,64 +1,46 @@
-/**
- * @file
- * CSS styles for lib hours - UT Austin modification
- *
- * @author Sean Watkins <slwatkins@uh.edu>
- * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
- */
-
+@media print {
 * {
 	color: black;
 }
-/* These selector stubs are only here in case they are needed so I don't have to track them down. Remove before final deploy */
-#libhours-locations #libhours-location-list {}
-#libhours-locations #libhours-location-list .libhours-location {}
-#libhours-locations #libhours-location-list .libhours-location:hover {}
-#libhours-locations #libhours-location-list .libhours-location.selected {}
-#libhours-locations #libhours-location-list .libhours-location.selected:hover {}
-#libhours-locations #libhours-location-list .libhours-location.libhours-child {}
-#libhours-periods {}
-#libhours-periods-tabs {}
-#libhours-periods-tabs li {}
-#libhours-periods-tabs li:hover {}
-#libhours-periods-tabs li.selected {}
-#libhours-periods-tabs li.selected:hover {}
-#libhours-periods-tabs li .libhours-name {}
-#libhours-periods-tabs li .libhours-daterange {}
-#libhours-periods .libhours-view {}
-#libhours-periods .libhours-view.selected {}
-#libhours-periods .libhours-stdhours {}
-#libhours-periods .libhours-stdhours ul {}
-#libhours-periods .libhours-stdhours .libhours-name {}
-#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-name {}
-#libhours-periods .libhours-stdhours .libhours-name p.libhours-location-childname {}
-#libhours-periods .libhours-stdhours .libhours-name p.libhours-period-name {}
-#libhours-periods .libhours-stdhours .libhours-hour {}
-#libhours-periods .libhours-stdhours .libhours-hour .libhours-dow {}
-#libhours-periods .libhours-stdhours .libhours-hour .libhours-time {}
-#libhours-periods .libhours-exceptions {}
-#libhours-periods .libhours-exceptions .libhours-name {}
-#libhours-periods .libhours-exceptions .libhours-hour {}
-#libhours-periods .libhours-exceptions .libhours-hour ul {}
-#libhours-periods .libhours-exceptions .libhours-hour .libhours-label {}
-#libhours-periods .libhours-exceptions .libhours-hour .libhours-emergency span {}
-#libhours-periods .libhours-exceptions .libhours-hour .libhours-time {}
-#libhours-periods .libhours-locationdescription {}
-#libhours-periods .libhours-disclaimer {}
+html {
 
+}
+body {
+	font-size: 28px;
+	padding: 0;
+	margin: 0;
+}
 #wordmarkblock,
 #libwordblock,
 #navcontainer,
 #breadcrumb,
+#head,
 #footer {
 	display: none;
 }
 #libhours-locations,
 #libhours-periods-tabs li,
-#libhours-periods-tabs div.libhours-name {
+#libhours-periods-tabs div.libhours-name,
+div#libhours-periods .libhours-view.deselected {
 	display: none;
 }
 #contentbox {
 	border: none;
+}
+div#libhours-content ul {
+	line-height: 1.4em;
+	margin: 20px 0;
+}
+#libhours-content ul li {
+	list-style-type: none;
+	margin-left: -1em;
+}
+#libhours-content ul li.libhours-time {
+	margin-left: 0;
+}
+#libhours-periods {
+	width: 26em;
+	font-size: 2.5em;
 }
 #libhours-periods .libhours-view {
 	border: none;
@@ -70,12 +52,26 @@
 #libhours-periods .libhours-exceptions {
 	float: none;
 	min-height: none;
+	clear: both;
 }
 #libhours-periods .libhours-exceptions {
 	border: 1px black solid;
+	padding: 0;
 }
 #libhours-periods .libhours-stdhours .libhours-name {
 	padding: 0;
+	line-height: .5em;
+}
+#libhours-periods .libhours-stdhours .libhours-location-name {
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 0;
+}
+#libhours-periods .libhours-exceptions .libhours-name {
+	padding: 15px 10px;
+	line-height: .5em;
+	border-bottom: 1px black solid;
+	font-weight: bold;
 }
 #libhours-periods-tabs {
 
@@ -92,6 +88,15 @@
 p.libhours-period-name.libhours-daterange {
 	display: block;
 }
+#libhours-periods .libhours-stdhours .libhours-hour .libhours-dow,
+#libhours-periods .libhours-stdhours .libhours-hour .libhours-time {
+	display: inline;
+}
+#libhours-periods .libhours-stdhours .libhours-hour .libhours-time {
+	position: absolute;
+	left: 10em;
+}
 #libhours-exceptions {
 	display: block;
+}
 }
