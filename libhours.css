@@ -151,7 +151,7 @@
 }
 #libhours-periods .libhours-stdhours {
   float: left;
-  min-height: 165px;
+/*   min-height: 165px; */
   width: 330px;
 }
 #libhours-periods .libhours-stdhours ul {
