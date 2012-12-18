@@ -76,12 +76,12 @@ $hoursurl = $apiurl . $apiformat . $apihourslocation . $apihoursaction;
 $openurl = $apiurl . $apiformat . $apiopenaction;
 
 /* Retrieve JSON */
-$hoursjsonfile = get_content($hoursurl);
-$openjsonfile = get_content($openurl);
+get_content($hoursurl) = $hoursjsonfile;
+get_content($openurl) = $openjsonfile;
 
 /* Decode JSON */
-$decodedhoursjson = json_decode($hoursjsonfile, true);
-$decodedopenjson = json_decode($openjsonfile, true);
+json_decode($hoursjsonfile, true) = $decodedhoursjson;
+json_decode($openjsonfile, true) = $decodedopenjson;
 
 /* 1. Check JSON Status And Print Out Only Today
  * This check ensures that if the api doesn't return for some reason, nothing is printed
@@ -102,9 +102,9 @@ if ($decodedhoursjson["status"] === 'ok'){
 		}
 	$i++;
 	}
-	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></a></span></div>";
+	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
 } else {
-	echo "<div id='libhours-header-widget' class='libhours-header-widget-error'><span id='libhours-header-widget-clockicon'>[</span><span><strong><a href='http://drupal.lib.utexas.edu/hours'>Library Hours</a></strong></span></div>";
+	echo "<div id='libhours-header-widget' class='libhours-header-widget-error'><span id='libhours-header-widget-clockicon'>[</span><strong><a href='http://drupal.lib.utexas.edu/hours'>Library Hours</a></strong></div>";
 }
 
 
