@@ -18,6 +18,15 @@
  * @see template_preprocess_hours_display()
  */
 ?>
+<!-- These styles are necessary to help style the whole page outside of the module's content area, otherwise they would be in libhours.css -->
+<style type="text/css">
+@media print {
+#contentbox {
+	border: none;
+}}
+h1.title {margin: 0;}
+</style>
+
 <div id="libhours-content">
   <div id="libhours-locations">
     <ul id="libhours-location-list">
