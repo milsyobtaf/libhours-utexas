@@ -88,7 +88,9 @@
         <?php endif; ?>
         <div class="libhours-locationdescription"><?php echo $description ?></div>
         <div class="libhours-disclaimer">
-          <?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?><br />       <strong><?php echo t('Hours are subject to change without notice.') ?></strong>
+          		  <?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?><br />
+          		  <?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?><br />
+          <strong><?php echo t('Hours are subject to change without notice.') ?></strong>
         </div>
       </div>
     <?php endforeach; ?>
