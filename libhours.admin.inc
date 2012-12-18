@@ -195,7 +195,7 @@ function libhours_admin_location_hours($lid = 0) {
 
   $output .= '<h2>' . t('Periods') . '</h2>';
 
-  $header = array(t('Semester'), t('Date Rage'), t('Operations'));
+  $header = array(t('Semester'), t('Date Range'), t('Operations'));
   $rows = array();
   $rs = db_query("SELECT p.*, s.name FROM {libhours_periods} p INNER JOIN {libhours_semesters} s ON s.sid=p.sid WHERE p.lid=%d ORDER BY p.from_date ASC", $lid);
   while ($row = db_fetch_object($rs)) {
@@ -215,7 +215,7 @@ function libhours_admin_location_hours($lid = 0) {
   $header = array(
     t('Label'),
     t('Type'),
-    t('Date Rage'),
+    t('Date Range'),
     t('Hours'),
     t('Operations'),
   );
@@ -291,7 +291,7 @@ function libhours_admin_period_form(&$form_state, $period) {
 
   $form['daterange'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Date Rage'),
+    '#title' => t('Date Range'),
     '#collapsible' => FALSE,
   );
 
