@@ -78,6 +78,13 @@ function libhours_menu() {
     'file' => 'libhours.pages.inc',
   );
 
+  $items['hours/open'] = array(
+    'title' => 'Now Open',
+    'page callback' => 'libhours_display',
+    'access arguments' => array('access content'),
+    'file' => 'libhours-open.pages.inc',
+  );
+
   /* API ENDPOINT */
 
   $items['hours/api'] = array(

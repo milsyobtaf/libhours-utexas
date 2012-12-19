@@ -9,7 +9,7 @@
  */
 
 /**
- * Display the hours page for a given location
+ * Display the hours page for a giving location
  *
  * @param int $lid
  *   Location unique identifier
