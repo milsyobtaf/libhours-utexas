@@ -74,23 +74,27 @@ h1.title {margin: 0;}
             <?php endfor; ?>
           </ul>
         </div>
-        <?php if(count($period['exceptions']) > 0 || count($period['emerexceptions']) > 0): ?>
+        <?php if($period['exceptions'] || $period['emerexceptions']): ?>
         <div class="libhours-exceptions">
           <div class="libhours-name"><?php echo t('Exceptions') ?></div>
           <div class="libhours-hour">
             <ul>
+              <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
                 <li class="libhours-label libhours-emergency"><span><?php echo $emerexception['name'] ?></span></li>
                 <?php foreach($emerexception['times'] as $time): ?>
                   <li class="libhours-time"><?php echo $time ?></li>
                 <?php endforeach; ?>
               <?php endforeach; ?>
+              <?php endif; ?>
+              <?php if($period['exceptions']): ?>
               <?php foreach($period['exceptions'] as $exception): ?>
                 <li class="libhours-label"><?php echo $exception['name'] ?></li>
                 <?php foreach($exception['times'] as $time): ?>
                   <li class="libhours-time"><?php echo $time ?></li>
                 <?php endforeach; ?>
               <?php endforeach; ?>
+              <?php endif; ?>
             </ul>
           </div>
         </div>
