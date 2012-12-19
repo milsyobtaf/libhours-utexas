@@ -253,4 +253,8 @@ p.libhours-period-name.libhours-daterange {
   padding-top: 10px;
   width: 100%;
 }
+#libhours-periods div.libhours-disclaimer p {
+  padding: 0;
+  margin: 0;
+}
 }
