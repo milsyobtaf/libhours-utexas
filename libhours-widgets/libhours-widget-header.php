@@ -76,12 +76,12 @@ $hoursurl = $apiurl . $apiformat . $apihourslocation . $apihoursaction;
 $openurl = $apiurl . $apiformat . $apiopenaction;
 
 /* Retrieve JSON */
-get_content($hoursurl) = $hoursjsonfile;
-get_content($openurl) = $openjsonfile;
+$hoursjsonfile = get_content($hoursurl);
+$openjsonfile = get_content($openurl);
 
 /* Decode JSON */
-json_decode($hoursjsonfile, true) = $decodedhoursjson;
-json_decode($openjsonfile, true) = $decodedopenjson;
+$decodedhoursjson = json_decode($hoursjsonfile, true);
+$decodedopenjson = json_decode($openjsonfile, true);
 
 /* 1. Check JSON Status And Print Out Only Today
  * This check ensures that if the api doesn't return for some reason, nothing is printed
