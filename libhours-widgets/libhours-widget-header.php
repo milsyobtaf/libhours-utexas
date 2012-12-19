@@ -90,7 +90,7 @@ $decodedopenjson = json_decode($openjsonfile, true);
  * The "date(w)" in the meat of the calls to $decodedjson pulls the 0-index day of the week and feeds it to the array, so it only shows today's data
  */
 
-if ($decodedhoursjson["status"] === 'ok'){
+if ($decodedopenjson["status"] === 'ok'){
 	$i = 0;
 	while ($i < count($decodedopenjson["locations"])){
 		if ($apilibrary == $decodedopenjson["locations"][$i]["id"]){
