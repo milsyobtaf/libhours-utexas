@@ -257,4 +257,19 @@ p.libhours-period-name.libhours-daterange {
   padding: 0;
   margin: 0;
 }
+#libhours-locations-open td.libhours-open-location,
+#libhours-locations-open td.libhours-open-location.child {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 4px;
+}
+#libhours-locations-open td.libhours-open-location-hours {
+  color: #666;
+  font-size: 1.2em;
+  padding: 4px;
+}
+td.libhours-open-location.child {
+  position: relative;
+  left: 10px;
+}
 }

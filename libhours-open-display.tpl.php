@@ -22,32 +22,17 @@
 	border: none;
 }}
 h1.title {margin: 0;}
-
-#libhours-locations-open {
-  float: left;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 4px;
-}
-#libhours-locations-open li.libhours-location-open {}
-#libhours-locations-open li.libhours-location-open.child {
-  margin-left: 5px;
-}
 </style>
 
 <div id="libhours-content">
-    <ul id="libhours-locations-open">
+    <table id="libhours-locations-open">
       <?php foreach($variables as $location): ?>
-        <li class="libhours-location-open<?php echo (($location['child']) ? ' child' : '') ?>"><span><a href="/hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a></span><span><?php echo $location['hours'] ?></span></li>
+        <tr>
+          <td class="libhours-open-location<?php echo (($location['child']) ? ' child' : '') ?>">
+            <a href="/hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
+          </td>
+          <td class="libhours-open-location-hours"><?php echo $location['hours'] ?></td>
+        </tr>
       <?php endforeach; ?>
-    </ul>
+    </table>
 </div>
-
-<!--
-<?php
-echo "<div style='clear:both;'><pre>";
-  print_r($variables);
-  echo date("Hi");
-echo "</pre></div>";
-?>
--->
