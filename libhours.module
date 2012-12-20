@@ -52,6 +52,10 @@ function libhours_theme() {
       'arguments' => array('lid' => 0, 'pid' => 0),
       'template' => 'libhours-display',
     ),
+    'hours_open_display' => array(
+      'arguments' => array('lid' => 0, 'pid' => 0),
+      'template' => 'libhours-open-display',
+    ),
   );
 }
 
@@ -80,9 +84,9 @@ function libhours_menu() {
 
   $items['hours/open'] = array(
     'title' => 'Now Open',
-    'page callback' => 'libhours_display',
+    'page callback' => 'libhours_open_display',
     'access arguments' => array('access content'),
-    'file' => 'libhours-open.pages.inc',
+    'file' => 'libhours.pages.inc',
   );
 
   /* API ENDPOINT */
@@ -419,6 +423,87 @@ function template_preprocess_hours_display(&$variables) {
   }
 }
 
+/**
+ * Preprocess for the hours_open_display theme
+ *
+ * @see libhours-open-display.tpl.php
+ */
+function template_preprocess_hours_open_display(&$return) {
+
+  $today = time();
+  $dow = date("w", $today);
+  $time = date("Hi", $today);
+  $return = array('locations' => $locations);
+  
+  $query = "SELECT l.lid AS id, l.name AS location, l.parent, h.open, h.close FROM {libhours_locations} l 
+                      INNER JOIN {libhours_periods} p ON l.lid=p.lid
+                      INNER JOIN {libhours_hours} h ON p.pid=h.pid
+                  WHERE SUBSTRING(h.dow, %d, 1) = '1' AND %d >= p.from_date AND %d <= p.to_date";
+
+  /* Get the regular hours */
+  $rs = db_query($query . " AND parent=0 ORDER BY location", ($dow + 1), $today, $today);
+  while ($row = db_fetch_object($rs)) {
+    $checktime = ($row->close < $row->open) ? ($row->close + 2400) : $row->close;
+    if ($time >= $row->open && $time < $checktime) {
+      $return[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    $crs = db_query($query . " AND parent=%d ORDER BY location", ($dow + 1), $today, $today, $row->id);
+    while ($child = db_fetch_object($crs)) {
+      $checktime = ($child->close < $child->open) ? ($child->close + 2400) : $child->close;
+      if ($time >= $child->open && $time < $checktime) {
+        $return[$child->id] = array(
+          'id' => $child->id,
+          'location' => ' -- ' . $child->location,
+          'hours' => _libhours_displayhours($child->open, $child->close),
+        );
+      }
+    }
+  }
+
+  /* Find any exceptions for today */
+  $rs = db_query("SELECT l.lid AS id, l.name AS location, e.open, e.close FROM {libhours_locations} l
+                      INNER JOIN {libhours_exceptions} e ON e.lid=l.lid
+                  WHERE %d >= e.from_date AND %d <= e.to_date", $today, $today);
+  /* Going to only removed locations that might be currently closed because of a exception, or see if a new location is open */
+  while ($row = db_fetch_object($rs)) {
+    $checktime = ($row->close < $row->open) ? ($row->close + 2400) : $row->close;
+    /* We have a new location that is open because of a exception */
+    if ($time >= $row->open && $time < $checktime && !isset($return[$row->id])) {
+      $return[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    elseif ($row->open == 0 && $row->close == 0 && isset($return[$row->id])) {
+      /* the location is closed */
+      unset($return[$row->id]);
+    }
+    elseif ($row->open == 0 && $row->close == 2359 && !isset($return[$row->id])) {
+      /* the location is open 24hrs */
+      $return[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    elseif ($time <= $row->open || $time >= $checktime) {
+      /* the location is closed */
+      unset($return[$row->id]);
+    }
+  }
+
+  foreach ($return as $index => $location) {
+    $returns[] = $location;
+  }
+  print_r($returns);
+
+  return $returns;
+}
 /**
  * returns day of week
  *
