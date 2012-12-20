@@ -24,12 +24,12 @@ function libhours_display($lid = 0, $pid = 0) {
     return theme('hours_display', $lid, $pid);
 }
 
-function libhours_open_display($lid = 0, $pid = 0) {
+function libhours_open_display() {
     global $conf;
     /* turn off drupal cache for this page */
     $conf['cache'] = FALSE;
 
-    return theme('hours_open_display', $lid, $pid);
+    return theme('hours_open_display');
 }
 
 /**

@@ -8,16 +8,12 @@
  * @copyright 2011 University of Houston Libraries (http://info.lib.uh.edu)
  *
  * Available variables:
- * - $lid: Location unique identifier
- * - $pid: Period unique identifier
- * - $locations: Array of available locations
- * - $periods: Array of period information for a selected location
- * - $description: Location description string
+ * - $openvariables: Array of open locations and times
+ * - $location: 
  *
  * @see template_preprocess()
  * @see template_preprocess_hours_open_display()
  */
-firep("hello!");
 ?>
 <!-- These styles are necessary to help style the whole page outside of the module's content area, otherwise they would be in libhours.css -->
 <style type="text/css">
@@ -26,17 +22,32 @@ firep("hello!");
 	border: none;
 }}
 h1.title {margin: 0;}
+
+#libhours-locations-open {
+  float: left;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 4px;
+}
+#libhours-locations-open li.libhours-location-open {}
+#libhours-locations-open li.libhours-location-open.child {
+  margin-left: 5px;
+}
 </style>
 
 <div id="libhours-content">
-  <div id="libhours-locations">
-    <ul id="libhours-location-list">
-    hello world!
-    <?php echo $description ?>
-      <?php foreach($return['locations'] as $location): ?>
-        <li><?php echo $location ?></li>
+    <ul id="libhours-locations-open">
+      <?php foreach($variables as $location): ?>
+        <li class="libhours-location-open<?php echo (($location['child']) ? ' child' : '') ?>"><span><a href="/hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a></span><span><?php echo $location['hours'] ?></span></li>
       <?php endforeach; ?>
     </ul>
-  </div>
 </div>
-<?php firep("hello!"); ?>
+
+<!--
+<?php
+echo "<div style='clear:both;'><pre>";
+  print_r($variables);
+  echo date("Hi");
+echo "</pre></div>";
+?>
+-->
