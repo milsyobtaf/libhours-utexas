@@ -32,6 +32,14 @@ function libhours_open_display() {
     return theme('hours_open_display');
 }
 
+function libhours_open_display_m() {
+    global $conf;
+    /* turn off drupal cache for this page */
+    $conf['cache'] = FALSE;
+
+    return theme('hours_open_display_m');
+}
+
 /**
  * Redirects page for backwards computability
  */
