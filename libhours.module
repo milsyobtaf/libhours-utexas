@@ -52,6 +52,10 @@ function libhours_theme() {
       'arguments' => array('lid' => 0, 'pid' => 0),
       'template' => 'libhours-display',
     ),
+    'hours_display' => array(
+      'arguments' => array('lid' => 0, 'pid' => 0),
+      'template' => 'libhours-display-m',
+    ),
     'hours_open_display' => array(
       'template' => 'libhours-open-display',
     ),
@@ -84,7 +88,12 @@ function libhours_menu() {
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
   );
-
+  $items['m/hours'] = array(
+    'title' => 'Library Hours',
+    'page callback' => 'libhours_display',
+    'access arguments' => array('access content'),
+    'file' => 'libhours.pages.inc',
+  );
   $items['hours/open'] = array(
     'title' => 'Now Open',
     'page callback' => 'libhours_open_display',
