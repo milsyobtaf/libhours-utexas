@@ -18,26 +18,7 @@
  * @see template_preprocess_hours_display()
  */
 ?>
-<!-- These styles are necessary to help style the whole page outside of the module's content area, otherwise they would be in libhours.css -->
-<style type="text/css">
-@media print {
-#contentbox {
-	border: none;
-}}
-h1.title {margin: 0;}
-</style>
-
 <div id="libhours-content">
-  <div id="libhours-locations">
-    <ul id="libhours-location-list">
-      <?php foreach($locations as $location): ?>
-        <li class="libhours-location <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>" onclick="javascript:libhours.location('<?php echo $location['lid'] ?>')"><?php echo $location['name'] ?></li>
-        <?php foreach($location['children'] as $child): ?>
-          <li class="libhours-location libhours-child <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>" onclick="javascript:libhours.location('<?php echo $child['lid'] ?>')"><?php echo $child['name'] ?></li>
-        <?php endforeach; ?>
-      <?php endforeach; ?>
-    </ul>
-  </div>
   <div id="libhours-periods">
     <ul id="libhours-periods-tabs">
       <?php foreach($periods as $period): ?>
