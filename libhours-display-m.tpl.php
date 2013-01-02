@@ -19,6 +19,23 @@
  */
 ?>
 <div id="libhours-content-m">
+<?php if ($variables['lid'] == 0): ?>
+  <div id="libhours-locations-m">
+    <ul id="libhours-location-list-m">
+      <?php foreach($locations as $location): ?>
+        <li class="libhours-location-m <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>">
+          <a href="<?php global $base_path; print $base_path . "hours/m/" . $location['lid'] ?>"><?php echo $location['name'] ?></a>
+        </li>
+        <?php foreach($location['children'] as $child): ?>
+          <li class="libhours-location libhours-child-m <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>">
+            <a href="<?php global $base_path; print $base_path . "hours/m/" . $child['lid'] ?>"><?php echo $child['name'] ?></a>
+          </li>
+        <?php endforeach; ?>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+<?php endif; ?>
+<?php if ($variables['lid'] !== 0): ?>
   <div id="libhours-periods-m">
       <div class="libhours-disclaimer-m">
   		  <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
@@ -81,4 +98,11 @@
       </div>
     <?php endforeach; ?>
   </div>
+  <table class="libhours-navigation-m">
+    <tr>
+      <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
+      <td><a href="<?php global $base_path; print $base_path; ?>hours/m/">All Hours</a></td>
+    </tr>
+  </table>
+<?php endif; ?>
 </div>
