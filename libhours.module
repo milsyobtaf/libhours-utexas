@@ -74,14 +74,6 @@ function libhours_menu() {
 
   /* PAGE PATHS */
 
-  /* This menu will be deprecated */
-  $items['libraryhours'] = array(
-    'title' => 'Library Hours',
-    'page callback' => 'libhours_redirect',
-    'access arguments' => array('access content'),
-    'file' => 'libhours.pages.inc',
-  );
-
   $items['hours'] = array(
     'title' => 'Library Hours',
     'page callback' => 'libhours_display',
@@ -110,14 +102,6 @@ function libhours_menu() {
   /* API ENDPOINT */
 
   $items['hours/api'] = array(
-    'title' => 'Process the API call',
-    'page callback' => 'libhours_api',
-    'access arguments' => array('access content'),
-    'file' => 'libhours.api.inc',
-  );
-
-  /* This menu will be deprecated */
-  $items['libraryhours/api'] = array(
     'title' => 'Process the API call',
     'page callback' => 'libhours_api',
     'access arguments' => array('access content'),
