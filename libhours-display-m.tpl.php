@@ -39,18 +39,18 @@
 	          <!-- This date range output is here strictly for print styling - it is hidden by the default view CSS -->
 	          <p class="libhours-period-name-m libhours-daterange-m"><?php echo date("F j", $period['from_date']) ?> &ndash; <?php echo date("F j", $period['to_date']) ?></p>
 	      </div>
-          <ul>
+          <table>
             <?php for($i = 0; $i < count($period['hours']); $i++): ?>
-              <li class="libhours-hour-m">
-                <div class="libhours-dow-m">
-                  <?php echo _libhours_dow($i) ?>:
-                </div>
-                <div class="libhours-time-m">
-                  <?php echo $period['hours'][$i] ?>
-                </div>
-              </li>
+            <tr class="libhours-hour">
+              <td class="libhours-dow-m">
+                <?php echo _libhours_dow($i) ?>:
+              </td>
+              <td class="libhours-time-m">
+                <?php echo $period['hours'][$i] ?>
+              </td>
+            </tr>
             <?php endfor; ?>
-          </ul>
+          </table>
         </div>
         <?php if($period['exceptions'] || $period['emerexceptions']): ?>
         <div class="libhours-exceptions-m">
@@ -59,18 +59,18 @@
             <ul>
               <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
-                <li class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></li>
                 <?php foreach($emerexception['times'] as $time): ?>
                   <li class="libhours-time-m"><?php echo $time ?></li>
                 <?php endforeach; ?>
+                <li class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></li>
               <?php endforeach; ?>
               <?php endif; ?>
               <?php if($period['exceptions']): ?>
               <?php foreach($period['exceptions'] as $exception): ?>
-                <li class="libhours-label-m"><?php echo $exception['name'] ?></li>
                 <?php foreach($exception['times'] as $time): ?>
                   <li class="libhours-time-m"><?php echo $time ?></li>
                 <?php endforeach; ?>
+                <li class="libhours-label-m"><?php echo $exception['name'] ?></li>
               <?php endforeach; ?>
               <?php endif; ?>
             </ul>

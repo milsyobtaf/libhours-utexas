@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Theme for patron hours display of currently open branches for the libhours module
@@ -15,7 +14,6 @@
  * @see template_preprocess_hours_open_display()
  */
 ?>
-
 <div id="libhours-content-m">
     <table id="libhours-locations-open-m">
       <?php foreach($variables as $location): ?>
