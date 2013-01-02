@@ -52,14 +52,14 @@ function libhours_theme() {
       'arguments' => array('lid' => 0, 'pid' => 0),
       'template' => 'libhours-display',
     ),
-    'hours_display' => array(
+    'hours_display_m' => array(
       'arguments' => array('lid' => 0, 'pid' => 0),
       'template' => 'libhours-display-m',
     ),
     'hours_open_display' => array(
       'template' => 'libhours-open-display',
     ),
-    'hours_open_display' => array(
+    'hours_open_display_m' => array(
       'template' => 'libhours-open-display-m',
     ),
 
@@ -85,16 +85,17 @@ function libhours_menu() {
     'page callback' => 'libhours_open_display',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
+    'weight' => '-1',
   );
   $items['hours/m'] = array(
     'title' => 'Mobile Library Hours',
-    'page callback' => 'libhours_display',
+    'page callback' => 'libhours_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
   );
   $items['hours/m/open'] = array(
     'title' => 'Mobile Now Open',
-    'page callback' => 'libhours_open_display',
+    'page callback' => 'libhours_open_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
   );
@@ -501,6 +502,202 @@ function template_preprocess_hours_open_display(&$variables) {
     }
   }
 }
+
+/**
+ * Preprocess for the hours_display theme
+ *
+ * @see libhours-display.tpl.php
+ */
+function template_preprocess_hours_display_m(&$variables) {
+
+  if (!$variables['lid']) {
+    $variables['lid'] = 1;
+  }
+  $lid = $variables['lid'];
+
+  $today = time();
+
+  if (!$variables['pid']) {
+    $variables['pid'] = db_result(db_query_range("SELECT pid FROM {libhours_periods} WHERE %d >= from_date AND %d <= to_date AND lid=%d ORDER BY from_date DESC", $today, $today, $lid, 0, 1));
+    if (empty($variables['pid'])) {
+      $variables['pid'] = db_result(db_query_range("SELECT pid FROM {libhours_periods} WHERE from_date >= %d AND lid=%d ORDER BY from_date ASC", $today, $lid, 0, 1));
+    }
+  }
+  $pid = $variables['pid'];
+
+  /* Used when displaying the periods for the location */
+  $location = db_fetch_object(db_query("SELECT * FROM {libhours_locations} WHERE lid=%d", $lid));
+  $variables['description'] = check_markup($location->description);
+/*   
+ * Changed the above line to allow for markup in descriptions instead of plain text
+ *	$variables['description'] = $location->description; 
+ *	
+*/
+  
+  /* Load up the available locations */
+  $variables['locations'] = array();
+  $lrs = db_query("SELECT * FROM {libhours_locations} WHERE parent=0 ORDER BY lid ASC");
+  while ($row = db_fetch_object($lrs)) {
+    $children = array();
+    $crs = db_query("SELECT * FROM {libhours_locations} WHERE parent=%d ORDER BY name ASC", $row->lid);
+    while ($child = db_fetch_object($crs)) {
+      $children[] = array('lid' => $child->lid, 'name' => check_plain($child->name));
+    }
+    $variables['locations'][] = array(
+      'lid' => $row->lid,
+      'name' => check_plain($row->name),
+      'children' => $children,
+    );
+  }
+
+  /* Load the next 4 periods */
+  $variables['periods'] = array();
+  $rs = db_query_range("SELECT *, s.name FROM {libhours_periods} p
+                      INNER JOIN {libhours_semesters} s ON p.sid = s.sid
+                  WHERE lid = %d AND %d <= to_date ORDER BY from_date ASC", $lid, $today, $today, 0, 4);
+  while ($period = db_fetch_object($rs)) {
+    $hours = array();
+    $display_hours = array();
+    $rh = db_query("SELECT * FROM {libhours_hours} WHERE pid=%d ORDER BY dow DESC", $period->pid);
+    while ($hour = db_fetch_object($rh)) {
+      for ($i = 0; $i < strlen($hour->dow); $i++) {
+        if ($hour->dow[$i] == '1') {
+          $hours[$i] = array('open' => $hour->open, 'close' => $hour->close);
+        }
+      }
+    }
+    for ($i = 0; $i < count($hours); $i++) {
+      $previdx = ($i == 0) ? (count($hours) - 1) : ($i - 1);
+      $nextidx = (($i + 1) == count($hours)) ? 0 : ($i + 1);
+
+      $display_hours[$i] = _libhours_displayhours($hours[$i]['open'], $hours[$i]['close'], $hours[$previdx], $hours[$nextidx]);
+    }
+
+    /* Load the exceptions within the period */
+    $vexceptions = array();
+    $ers = db_query("SELECT * FROM {libhours_exceptions} WHERE tid != 2 AND lid=%d AND from_date >= %d AND to_date <= %d AND %d <= to_date ORDER BY from_date ASC", $lid, $period->from_date, $period->to_date, $today);
+    $exceptions = array();
+    /* Gather together all the exceptions with the same label */
+    while ($exception = db_fetch_object($ers)) {
+      if (date("n/d/Y", $exception->from_date) == date("n/d/Y", $exception->to_date)) {
+        $date = date("l: M j", $exception->from_date);
+      }
+      else {
+        $date = date("M j", $exception->from_date) . ' - ' . date("M j", $exception->to_date);
+      }
+
+      $exceptions[strtoupper($exception->label)][] = $date . ', ' . _libhours_displayhours($exception->open, $exception->close);
+    }
+    /* Load all the sorted exceptions for displaying  */
+    foreach ($exceptions as $label => $times) {
+      $vexceptions[] = array('name' => check_plain($label), 'times' => $times);
+    }
+    $emerrs = db_query("SELECT * FROM {libhours_exceptions} WHERE tid = 2 AND lid=%d AND from_date >= %d AND to_date <= %d AND %d <= to_date ORDER BY from_date ASC", $lid, $period->from_date, $period->to_date, $today);
+    $emerexceptions = array();
+    /* Gather together all the exceptions with the same label */
+    while ($emerexception = db_fetch_object($emerrs)) {
+      if (date("n/d/Y", $emerexception->from_date) == date("n/d/Y", $emerexception->to_date)) {
+        $date = date("l: M j", $emerexception->from_date);
+      }
+      else {
+        $date = date("M j", $emerexception->from_date) . ' - ' . date("M j", $emerexception->to_date);
+      }
+
+      $emerexceptions[strtoupper($emerexception->label)][] = $date . ', ' . _libhours_displayhours($emerexception->open, $emerexception->close);
+    }
+    /* Load all the sorted exceptions for displaying  */
+    foreach ($emerexceptions as $label => $times) {
+      $vemerexceptions[] = array('name' => check_plain($label), 'times' => $times);
+    }
+    $variables['periods'][] = array(
+      'pid' => $period->pid,
+      'name' => check_plain($period->name),
+      'from_date' => $period->from_date,
+      'to_date' => $period->to_date,
+      'hours' => $display_hours,
+      'exceptions' => $vexceptions,
+      'emerexceptions' => $vemerexceptions,
+    );
+  }
+}
+
+/**
+ * Preprocess for the hours_open_display theme
+ *
+ * @see libhours-open-display.tpl.php
+ */
+function template_preprocess_hours_open_display_m(&$variables) {
+
+  $today = time();
+  $dow = date("w", $today);
+  $time = date("Hi", $today);
+
+  $variables = array('locations' => $locations);
+
+  $query = "SELECT l.lid AS id, l.name AS location, l.parent, h.open, h.close FROM {libhours_locations} l 
+                      INNER JOIN {libhours_periods} p ON l.lid=p.lid
+                      INNER JOIN {libhours_hours} h ON p.pid=h.pid
+                  WHERE SUBSTRING(h.dow, %d, 1) = '1' AND %d >= p.from_date AND %d <= p.to_date";
+
+  /* Get the regular hours */
+  $rs = db_query($query . " AND parent=0 ORDER BY l.lid", ($dow + 1), $today, $today);
+  while ($row = db_fetch_object($rs)) {
+    $checktime = ($row->close < $row->open) ? ($row->close + 2400) : $row->close;
+    if ($time >= $row->open && $time < $checktime) {
+      $variables[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    $crs = db_query($query . " AND parent=%d ORDER BY l.lid", ($dow + 1), $today, $today, $row->id);
+    while ($child = db_fetch_object($crs)) {
+      $checktime = ($child->close < $child->open) ? ($child->close + 2400) : $child->close;
+      if ($time >= $child->open && $time < $checktime) {
+        $variables[$child->id] = array(
+          'id' => $child->id,
+          'location' => $child->location,
+          'hours' => _libhours_displayhours($child->open, $child->close),
+          'child' => TRUE,
+        );
+      }
+    }
+  }
+
+  /* Find any exceptions for today */
+  $rs = db_query("SELECT l.lid AS id, l.name AS location, e.open, e.close FROM {libhours_locations} l
+                      INNER JOIN {libhours_exceptions} e ON e.lid=l.lid
+                  WHERE %d >= e.from_date AND %d <= e.to_date", $today, $today);
+  /* Going to only remove locations that might be currently closed because of a exception, or see if a new location is open */
+  while ($row = db_fetch_object($rs)) {
+    $checktime = ($row->close < $row->open) ? ($row->close + 2400) : $row->close;
+    /* We have a new location that is open because of a exception */
+    if ($time >= $row->open && $time < $checktime && !isset($variables[$row->id])) {
+      $variables[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    elseif ($row->open == 0 && $row->close == 0 && isset($variables[$row->id])) {
+      /* the location is closed */
+      unset($variables[$row->id]);
+    }
+    elseif ($row->open == 0 && $row->close == 2359 && !isset($variables[$row->id])) {
+      /* the location is open 24hrs */
+      $variables[$row->id] = array(
+        'id' => $row->id,
+        'location' => $row->location,
+        'hours' => _libhours_displayhours($row->open, $row->close),
+      );
+    }
+    elseif ($time <= $row->open || $time >= $checktime) {
+      /* the location is closed */
+      unset($variables[$row->id]);
+    }
+  }
+}
+
 /**
  * returns day of week
  *
