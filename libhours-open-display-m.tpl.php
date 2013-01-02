@@ -21,7 +21,7 @@
       <?php foreach($variables as $location): ?>
         <tr>
           <td class="libhours-open-location<?php echo (($location['child']) ? ' child' : '') ?>">
-            <a href="/hours/m/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
+            <a href="<?php global $base_path; print $base_path; ?>m/hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
           </td>
           <td class="libhours-open-location-hours"><?php echo $location['hours'] ?></td>
         </tr>
