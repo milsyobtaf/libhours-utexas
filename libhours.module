@@ -504,14 +504,14 @@ function template_preprocess_hours_open_display(&$variables) {
 }
 
 /**
- * Preprocess for the hours_display theme
+ * Preprocess for the hours_display_m theme
  *
- * @see libhours-display.tpl.php
+ * @see libhours-display-m.tpl.php
  */
 function template_preprocess_hours_display_m(&$variables) {
 
   if (!$variables['lid']) {
-    $variables['lid'] = 1;
+    $variables['lid'] = 0;
   }
   $lid = $variables['lid'];
 
@@ -622,9 +622,9 @@ function template_preprocess_hours_display_m(&$variables) {
 }
 
 /**
- * Preprocess for the hours_open_display theme
+ * Preprocess for the hours_open_display_m theme
  *
- * @see libhours-open-display.tpl.php
+ * @see libhours-open-display-m.tpl.php
  */
 function template_preprocess_hours_open_display_m(&$variables) {
 
