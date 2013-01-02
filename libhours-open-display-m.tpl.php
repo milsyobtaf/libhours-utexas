@@ -16,14 +16,14 @@
  */
 ?>
 
-<div id="libhours-content">
-    <table id="libhours-locations-open">
+<div id="libhours-content-m">
+    <table id="libhours-locations-open-m">
       <?php foreach($variables as $location): ?>
         <tr>
-          <td class="libhours-open-location<?php echo (($location['child']) ? ' child' : '') ?>">
-            <a href="<?php global $base_path; print $base_path; ?>m/hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
+          <td class="libhours-open-location-m<?php echo (($location['child']) ? ' child' : '') ?>">
+            <a href="<?php global $base_path; print $base_path; ?>hours/m/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
           </td>
-          <td class="libhours-open-location-hours"><?php echo $location['hours'] ?></td>
+          <td class="libhours-open-location-hours-m"><?php echo $location['hours'] ?></td>
         </tr>
       <?php endforeach; ?>
     </table>
