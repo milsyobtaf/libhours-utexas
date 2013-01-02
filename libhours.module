@@ -437,7 +437,7 @@ function template_preprocess_hours_open_display(&$variables) {
   $dow = date("w", $today);
   $time = date("Hi", $today);
 
-  $variables = array('locations' => $locations);
+  $variables = array();
 
   $query = "SELECT l.lid AS id, l.name AS location, l.parent, h.open, h.close FROM {libhours_locations} l 
                       INNER JOIN {libhours_periods} p ON l.lid=p.lid
@@ -632,7 +632,7 @@ function template_preprocess_hours_open_display_m(&$variables) {
   $dow = date("w", $today);
   $time = date("Hi", $today);
 
-  $variables = array('locations' => $locations);
+  $variables = array();
 
   $query = "SELECT l.lid AS id, l.name AS location, l.parent, h.open, h.close FROM {libhours_locations} l 
                       INNER JOIN {libhours_periods} p ON l.lid=p.lid
