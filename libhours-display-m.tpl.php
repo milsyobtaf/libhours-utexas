@@ -35,13 +35,8 @@
     </ul>
   </div>
 <?php endif; ?>
-<?php if ($variables['lid'] !== 0): ?>
+<?php if ($variables['lid'] != 0): ?>
   <div id="libhours-periods-m">
-      <div class="libhours-disclaimer-m">
-  		  <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
-  		  <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
-  		  <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
-      </div>
     <?php foreach($periods as $period): ?>
       <div id="libhours-period-m-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : 'deselected') ?>">
         <div class="libhours-stdhours-m">
@@ -97,12 +92,17 @@
         <div class="libhours-locationdescription-m"><?php echo $description ?></div>
       </div>
     <?php endforeach; ?>
+    <div class="libhours-disclaimer-m">
+		  <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
+		  <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
+		  <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+    </div>
   </div>
+<?php endif; ?>
   <table class="libhours-navigation-m">
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/">All Hours</a></td>
     </tr>
   </table>
-<?php endif; ?>
 </div>
