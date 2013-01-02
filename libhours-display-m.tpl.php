@@ -48,7 +48,6 @@
 	          		<?php endforeach; ?>
 	          <?php endforeach; ?>
 	          <p class="libhours-period-name-m"><?php echo $period['name'] ?>&nbsp;Hours</p>
-	          <!-- This date range output is here strictly for print styling - it is hidden by the default view CSS -->
 	          <p class="libhours-period-name-m libhours-daterange-m"><?php echo date("F j", $period['from_date']) ?> &ndash; <?php echo date("F j", $period['to_date']) ?></p>
 	      </div>
           <table>
