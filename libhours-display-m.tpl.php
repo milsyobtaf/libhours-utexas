@@ -102,7 +102,9 @@
   <table class="libhours-navigation-m">
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
-      <td><a href="<?php global $base_path; print $base_path; ?>hours/m/">All Hours</a></td>
+      <?php if ($variables['lid'] != 0): ?>
+        <td><a href="<?php global $base_path; print $base_path; ?>hours/m/">All Hours</a></td>
+      <?php endif; ?>
     </tr>
   </table>
 </div>
