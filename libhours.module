@@ -89,6 +89,7 @@ function libhours_menu() {
   );
   $items['hours/m'] = array(
     'title' => 'Mobile Library Hours',
+/*     'title callback' => 'libhours_display_m_title', */
     'page callback' => 'libhours_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
@@ -107,6 +108,7 @@ function libhours_menu() {
     'page callback' => 'libhours_api',
     'access arguments' => array('access content'),
     'file' => 'libhours.api.inc',
+    'weight' => '10',
   );
 
   /* ADMIN PATHS */
@@ -228,6 +230,19 @@ function libhours_menu() {
 
   return $items;
 }
+
+/**
+ * Implement hook_menu title callback
+ */
+/**
+ * This is a wishlist feature that isn't currently working and time constraints prevent further work
+ */
+/*
+function libhours_display_m_title(){
+ $title = template_preprocess_hours_display_m($variables['locations']['name']); 
+  return $title = $variables['locations']['lid'];
+}
+*/
 
 /**
  * Implements hook_elements().
