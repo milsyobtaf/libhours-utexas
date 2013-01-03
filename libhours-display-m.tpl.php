@@ -68,29 +68,31 @@
           </table>
         </div>
         <?php if($period['exceptions'] || $period['emerexceptions']): ?>
-        <div class="libhours-exceptions-m">
-          <div class="libhours-name-m"><?php echo t('Exceptions') ?></div>
-          <div class="libhours-hour-m">
-            <ul>
+        <table class="libhours-exceptions-m">
+          <thead class="libhours-name-m"><?php echo t('Exceptions') ?></thead>
+          <tbody class="libhours-hour-m">
               <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
+                <tr>
                 <?php foreach($emerexception['times'] as $time): ?>
-                  <li class="libhours-time-m"><?php echo $time ?></li>
+                  <td class="libhours-time-m"><?php echo $time ?></td>
                 <?php endforeach; ?>
-                <li class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></li>
+                  <td class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></td>
+                </tr>
               <?php endforeach; ?>
               <?php endif; ?>
               <?php if($period['exceptions']): ?>
               <?php foreach($period['exceptions'] as $exception): ?>
+                <tr>
                 <?php foreach($exception['times'] as $time): ?>
-                  <li class="libhours-time-m"><?php echo $time ?></li>
+                  <td class="libhours-time-m"><?php echo $time ?></td>
                 <?php endforeach; ?>
-                <li class="libhours-label-m"><?php echo $exception['name'] ?></li>
+                  <td class="libhours-label-m"><?php echo $exception['name'] ?></td>
+                </tr>
               <?php endforeach; ?>
               <?php endif; ?>
-            </ul>
-          </div>
-        </div>
+          </tbody>
+        </table>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
@@ -106,7 +108,7 @@
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
       <?php if ($variables['lid'] != 0): ?>
-        <td><a href="<?php print $base_path; ?>hours/m/">All Hours</a></td>
+        <td><a href="<?php print $base_path; ?>hours/m/">All Locations</a></td>
       <?php endif; ?>
     </tr>
   </table>
