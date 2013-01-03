@@ -7,6 +7,10 @@ This is a heavily modified version of Sean Watkins' Libhours-2.x module, whose o
 
 Multiple changes were made to better suit our needs, which are enumerated below.
 
+- Added mobile pages for a location list, specific location hours / exceptions and a mobile Now Open page
+
+- Added a Now Open page, in normal and mobile versions, that shows a list of the currently open locations and their current hours
+
 - On a purely presentational level, removed the use of the libhours-location-arrow.png file, and deleted the file and its img folder, due to several of our locations having long names that exceeded the dimensions of this file, and changed the base colors to reflect university colors.
 
 - Modified many dimensions in the .css file from px to percentages to allow a more flexible layout.
