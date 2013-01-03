@@ -25,4 +25,9 @@
         </tr>
       <?php endforeach; ?>
     </table>
+  <table class="libhours-navigation-m">
+    <tr>
+        <td><a href="<?php print $base_path; ?>hours/m/">All Locations</a></td>
+    </tr>
+  </table>
 </div>
