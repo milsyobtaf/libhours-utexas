@@ -37,16 +37,16 @@
 <?php endif; ?>
 <?php if ($variables['lid'] != 0): ?>
   <div id="libhours-periods-m">
+    <?php foreach($locations as $location): ?>
+  	<?php echo (($location['lid'] == $lid) ? '<p class="libhours-location-name-m">' . $location['name'] . '</p>' : '') ?>
+  		<?php foreach($location['children'] as $child): ?>
+  			<?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name-m">'. $location['name'] . '</p><p class="libhours-location-childname-m">' . $child['name'] . '</p>' : '') ?>
+  		<?php endforeach; ?>
+    <?php endforeach; ?>
     <?php foreach($periods as $period): ?>
       <div id="libhours-period-m-<?php echo $period['pid'] ?>" class="libhours-view <?php echo (($period['pid'] == $pid) ? 'selected' : 'deselected') ?>">
         <div class="libhours-stdhours-m">
           <div class="libhours-name-m">
-	          <?php foreach($locations as $location): ?>
-	          	<?php echo (($location['lid'] == $lid) ? '<p class="libhours-location-name-m">' . $location['name'] . '</p>' : '') ?>
-	          		<?php foreach($location['children'] as $child): ?>
-	          			<?php echo (($child['lid'] == $lid) ? '<p class="libhours-location-name-m">'. $location['name'] . '</p><p class="libhours-location-childname-m">' . $child['name'] . '</p>' : '') ?>
-	          		<?php endforeach; ?>
-	          <?php endforeach; ?>
 	          <p class="libhours-period-name-m"><?php echo $period['name'] ?>&nbsp;Hours</p>
 	          <p class="libhours-period-name-m libhours-daterange-m"><?php echo date("F j", $period['from_date']) ?> &ndash; <?php echo date("F j", $period['to_date']) ?></p>
 	      </div>
@@ -88,9 +88,9 @@
           </div>
         </div>
         <?php endif; ?>
-        <div class="libhours-locationdescription-m"><?php echo $description ?></div>
       </div>
     <?php endforeach; ?>
+    <div class="libhours-locationdescription-m"><?php echo $description ?></div>
     <div class="libhours-disclaimer-m">
 		  <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
 		  <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
