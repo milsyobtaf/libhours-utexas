@@ -21,18 +21,22 @@
 <div id="libhours-content-m">
 <?php if ($variables['lid'] == 0): ?>
   <div id="libhours-locations-m">
-    <ul id="libhours-location-list-m">
+    <table id="libhours-location-list-m">
       <?php foreach($locations as $location): ?>
-        <li class="libhours-location-m <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>">
+        <tr>
+        <td class="libhours-location-m <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>">
           <a href="<?php global $base_path; print $base_path . "hours/m/" . $location['lid'] ?>"><?php echo $location['name'] ?></a>
-        </li>
+        </td>
+        </tr>
         <?php foreach($location['children'] as $child): ?>
-          <li class="libhours-location libhours-child-m <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>">
+          <tr>
+          <td class="libhours-location libhours-child-m <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>">
             <a href="<?php global $base_path; print $base_path . "hours/m/" . $child['lid'] ?>"><?php echo $child['name'] ?></a>
-          </li>
+          </td>
+          </tr>
         <?php endforeach; ?>
       <?php endforeach; ?>
-    </ul>
+    </table>
   </div>
 <?php endif; ?>
 <?php if ($variables['lid'] != 0): ?>
@@ -102,7 +106,7 @@
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
       <?php if ($variables['lid'] != 0): ?>
-        <td><a href="<?php global $base_path; print $base_path; ?>hours/m/">All Hours</a></td>
+        <td><a href="<?php print $base_path; ?>hours/m/">All Hours</a></td>
       <?php endif; ?>
     </tr>
   </table>
