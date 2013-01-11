@@ -15,16 +15,35 @@
  * @see template_preprocess_hours_open_display()
  */
 ?>
-
+<!-- These styles are necessary to help style the whole page outside of the module's content area, otherwise they would be in libhours.css -->
+<style type="text/css">
+  h1.title {margin: .5em 0;}
+</style>
 <div id="libhours-content">
     <table id="libhours-locations-open">
       <?php foreach($variables as $location): ?>
-        <tr>
-          <td class="libhours-open-location<?php echo (($location['child']) ? ' child' : '') ?>">
-            <a href="<?php global $base_path; print $base_path; ?>hours/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
+        <tr class="<?php echo (($location['child']) ? ' child' : '') ?>">
+          <td class="libhours-open-location">
+            <a href="<?php global $base_path; print $base_path; ?>hours/<?php echo $location['id']; ?>"><?php echo (($location['child']) ? '&ndash;&nbsp;' : '') ?><?php echo $location['location'] ?></a>
           </td>
           <td class="libhours-open-location-hours"><?php echo $location['hours'] ?></td>
         </tr>
       <?php endforeach; ?>
+    </table>
+    <table id="libhours-navigation">
+      <tr>
+        <td class="libhours-navigation">
+      		<a href="<?php print $base_path; ?>hours">All Locations</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+    		<div class="libhours-disclaimer">
+          <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
+          <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
+          <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+    		</div>
+        </td>
+      </tr>
     </table>
 </div>

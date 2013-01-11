@@ -20,24 +20,22 @@
 ?>
 <div id="libhours-content-m">
 <?php if ($variables['lid'] == 0): ?>
-  <div id="libhours-locations-m">
-    <table id="libhours-location-list-m">
-      <?php foreach($locations as $location): ?>
+  <table id="libhours-location-m">
+    <?php foreach($locations as $location): ?>
+      <tr>
+      <td class="libhours-location-m <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>">
+        <a href="<?php global $base_path; print $base_path . "hours/m/" . $location['lid'] ?>"><?php echo $location['name'] ?></a>
+      </td>
+      </tr>
+      <?php foreach($location['children'] as $child): ?>
         <tr>
-        <td class="libhours-location-m <?php echo (($location['lid'] == $lid) ? 'selected' : '') ?>">
-          <a href="<?php global $base_path; print $base_path . "hours/m/" . $location['lid'] ?>"><?php echo $location['name'] ?></a>
+        <td class="libhours-location libhours-child-m <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>">
+          <a href="<?php global $base_path; print $base_path . "hours/m/" . $child['lid'] ?>">&ndash;&nbsp;<?php echo $child['name'] ?></a>
         </td>
         </tr>
-        <?php foreach($location['children'] as $child): ?>
-          <tr>
-          <td class="libhours-location libhours-child-m <?php echo (($child['lid'] == $lid) ? 'selected' : '') ?>">
-            <a href="<?php global $base_path; print $base_path . "hours/m/" . $child['lid'] ?>"><?php echo $child['name'] ?></a>
-          </td>
-          </tr>
-        <?php endforeach; ?>
       <?php endforeach; ?>
-    </table>
-  </div>
+    <?php endforeach; ?>
+  </table>
 <?php endif; ?>
 <?php if ($variables['lid'] != 0): ?>
   <div id="libhours-periods-m">
@@ -54,7 +52,7 @@
 	          <p class="libhours-period-name-m"><?php echo $period['name'] ?>&nbsp;Hours</p>
 	          <p class="libhours-period-name-m libhours-daterange-m"><?php echo date("F j", $period['from_date']) ?> &ndash; <?php echo date("F j", $period['to_date']) ?></p>
 	      </div>
-          <table>
+          <table class="libhours-stdhours-m">
             <?php for($i = 0; $i < count($period['hours']); $i++): ?>
             <tr class="libhours-hour">
               <td class="libhours-dow-m">
@@ -96,20 +94,22 @@
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
-    <div class="libhours-locationdescription-m"><?php echo $description ?></div>
-    <div class="libhours-disclaimer-m">
-		  <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
-		  <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
-		  <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
-    </div>
-  </div>
 <?php endif; ?>
-  <table class="libhours-navigation-m">
+  <table id="libhours-navigation-m">
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Now Open</a></td>
       <?php if ($variables['lid'] != 0): ?>
         <td><a href="<?php print $base_path; ?>hours/m/">All Locations</a></td>
       <?php endif; ?>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="libhours-disclaimer-m">
+          <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
+          <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
+          <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+        </div>
+      </td>
     </tr>
   </table>
 </div>

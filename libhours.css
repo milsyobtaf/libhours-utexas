@@ -64,6 +64,37 @@
   width: 92%;
   font-weight: normal;
 }
+table#libhours-location-m td.libhours-location.libhours-child-m {
+  padding-left: 15px;
+}
+table#libhours-locations-open,
+table#libhours-navigation {
+  min-width: 400px;
+  font-size: 1.2em;
+}
+#libhours-locations-open td.libhours-open-location,
+#libhours-navigation td.libhours-navigation {
+  font-weight: bold;
+  font-size: .9em;
+}
+#libhours-locations-open td.libhours-open-location-hours {
+  font-size: .9em;
+  color: #666;
+  padding: 4px;
+}
+#libhours-locations-open tr.child td.libhours-open-location,
+#libhours-locations-open-m tr.child td.libhours-open-location-m {
+  padding: 0 5px 0 10px;
+}
+table#libhours-locations-open-m tbody,
+table#libhours-location-m tbody,
+table#libhours-location-list-m tbody,
+table#libhours-navigation-m tbody,
+table.libhours-stdhours-m tbody,
+table.libhours-exceptions-m tbody,
+table#libhours-navigation tbody {
+  border: none;
+}
 #libhours-periods {
   float: left;
   width: 75%;
@@ -245,31 +276,25 @@ p.libhours-period-name.libhours-daterange {
   padding: 10px 0 0 0;
   width: 640px;
 }
-#libhours-periods .libhours-disclaimer {
+#libhours-periods .libhours-disclaimer,
+#libhours-navigation .libhours-disclaimer {
   border-top: 1px solid #000;
   bottom: 0px;
   float: left;
   font-size: 12px;
   padding-top: 10px;
+  margin-top: 10px;
   width: 100%;
 }
-#libhours-periods div.libhours-disclaimer p {
+#libhours-navigation-m .libhours-disclaimer-m {
+  border-top: 1px solid #000;
+  bottom: 0px;
+  margin-top: 10px;
+}
+#libhours-periods div.libhours-disclaimer p,
+#libhours-navigation .libhours-disclaimer p,
+#libhours-navigation-m .libhours-disclaimer-m p {
   padding: 0;
   margin: 0;
-}
-#libhours-locations-open td.libhours-open-location,
-#libhours-locations-open td.libhours-open-location.child {
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 4px;
-}
-#libhours-locations-open td.libhours-open-location-hours {
-  color: #666;
-  font-size: 1.2em;
-  padding: 4px;
-}
-td.libhours-open-location.child {
-  position: relative;
-  left: 10px;
 }
 }

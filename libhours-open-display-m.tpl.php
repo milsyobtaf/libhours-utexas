@@ -15,19 +15,28 @@
  */
 ?>
 <div id="libhours-content-m">
-    <table id="libhours-locations-open-m">
-      <?php foreach($variables as $location): ?>
-        <tr>
-          <td class="libhours-open-location-m<?php echo (($location['child']) ? ' child' : '') ?>">
-            <a href="<?php global $base_path; print $base_path; ?>hours/m/<?php echo $location['id']; ?>"><?php echo $location['location'] ?></a>
-          </td>
-          <td class="libhours-open-location-hours-m"><?php echo $location['hours'] ?></td>
-        </tr>
-      <?php endforeach; ?>
-    </table>
-  <table class="libhours-navigation-m">
-    <tr>
-        <td><a href="<?php print $base_path; ?>hours/m/">All Locations</a></td>
-    </tr>
+  <table id="libhours-locations-open-m">
+    <?php foreach($variables as $location): ?>
+      <tr class="<?php echo (($location['child']) ? ' child' : '') ?>">
+        <td class="libhours-open-location-m">
+          <a href="<?php global $base_path; print $base_path; ?>hours/m/<?php echo $location['id']; ?>"><?php echo (($location['child']) ? '&ndash;&nbsp;' : '') ?><?php echo $location['location'] ?></a>
+        </td>
+        <td class="libhours-open-location-hours-m"><?php echo $location['hours'] ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+  <table id="libhours-navigation-m">
+      <tr>
+          <td><a href="<?php print $base_path; ?>hours/m/">All Locations</a></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="libhours-disclaimer-m">
+            <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
+            <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
+            <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+          </div>
+        </td>
+      </tr>
   </table>
 </div>
