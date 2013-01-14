@@ -31,10 +31,11 @@
       </tr>
       <tr>
         <td>
-          <div class="libhours-disclaimer-m">
-            <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
-            <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
-            <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+          <div class="libhours-footnote-m">
+            <p>In most libraries, the circulation and reserve desks close 15 minutes before the library closes.</p>
+            <p>UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.</p>
+            <p><strong>Hours are subject to change without notice.</strong></p>
+          <p class="summary-pdf"><a href="<?php print $base_path; ?>sites/default/files/hours/utl_hours_summary.pdf">UT Libraries Building Hours Summary (PDF)</a></p>
           </div>
         </td>
       </tr>

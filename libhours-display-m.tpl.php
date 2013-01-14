@@ -66,14 +66,15 @@
           </table>
         </div>
         <?php if($period['exceptions'] || $period['emerexceptions']): ?>
+        <div id="libhours-exceptions-m">
+        <p class="libhours-name-m"><?php print t('Exceptions') ?></p>
         <table class="libhours-exceptions-m">
-          <thead class="libhours-name-m"><?php echo t('Exceptions') ?></thead>
           <tbody class="libhours-hour-m">
               <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
                 <tr>
                 <?php foreach($emerexception['times'] as $time): ?>
-                  <td class="libhours-time-m"><?php echo $time ?></td>
+                  <td class="libhours-time-m"><span><?php echo $time ?></span></td>
                 <?php endforeach; ?>
                   <td class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></td>
                 </tr>
@@ -83,14 +84,15 @@
               <?php foreach($period['exceptions'] as $exception): ?>
                 <tr>
                 <?php foreach($exception['times'] as $time): ?>
-                  <td class="libhours-time-m"><?php echo $time ?></td>
+                  <td class="libhours-time-m"><span><?php echo $time ?></span></td>
                 <?php endforeach; ?>
-                  <td class="libhours-label-m"><?php echo $exception['name'] ?></td>
+                  <td class="libhours-label-m"><span><?php echo $exception['name'] ?></span></td>
                 </tr>
               <?php endforeach; ?>
               <?php endif; ?>
           </tbody>
         </table>
+        </div>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
@@ -104,10 +106,11 @@
     </tr>
     <tr>
       <td colspan="2">
-        <div class="libhours-disclaimer-m">
-          <p><?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?></p>
-          <p><?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?></p>
-          <p><strong><?php echo t('Hours are subject to change without notice.') ?></strong></p>
+        <div class="libhours-footnote-m">
+          <p>In most libraries, the circulation and reserve desks close 15 minutes before the library closes.</p>
+          <p>UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.</p>
+          <p><strong>Hours are subject to change without notice.</strong></p>
+          <p class="summary-pdf"><a href="<?php print $base_path; ?>sites/default/files/hours/utl_hours_summary.pdf">UT Libraries Building Hours Summary (PDF)</a></p>
         </div>
       </td>
     </tr>
