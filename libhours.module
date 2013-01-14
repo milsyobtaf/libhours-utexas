@@ -81,21 +81,21 @@ function libhours_menu() {
     'file' => 'libhours.pages.inc',
   );
   $items['hours/open'] = array(
-    'title' => 'Now Open',
+    'title' => 'Open Now',
     'page callback' => 'libhours_open_display',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
     'weight' => '-1',
   );
   $items['hours/m'] = array(
-    'title' => 'Mobile Library Hours',
+    'title' => 'Library Hours - Mobile',
 /*     'title callback' => 'libhours_display_m_title', */
     'page callback' => 'libhours_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
   );
   $items['hours/m/open'] = array(
-    'title' => 'Mobile Now Open',
+    'title' => 'Now Open - Mobile',
     'page callback' => 'libhours_open_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
