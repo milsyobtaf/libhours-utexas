@@ -72,22 +72,22 @@
           <tbody class="libhours-hour-m">
               <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
-                <tr>
                 <?php foreach($emerexception['times'] as $time): ?>
+                <tr>
                   <td class="libhours-time-m"><span><?php echo $time ?></span></td>
-                <?php endforeach; ?>
                   <td class="libhours-label-m libhours-emergency-m"><span><?php echo $emerexception['name'] ?></span></td>
                 </tr>
+                <?php endforeach; ?>
               <?php endforeach; ?>
               <?php endif; ?>
               <?php if($period['exceptions']): ?>
               <?php foreach($period['exceptions'] as $exception): ?>
-                <tr>
                 <?php foreach($exception['times'] as $time): ?>
+                <tr>
                   <td class="libhours-time-m"><span><?php echo $time ?></span></td>
-                <?php endforeach; ?>
                   <td class="libhours-label-m"><span><?php echo $exception['name'] ?></span></td>
                 </tr>
+                <?php endforeach; ?>
               <?php endforeach; ?>
               <?php endif; ?>
           </tbody>
