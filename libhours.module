@@ -516,7 +516,7 @@ function template_preprocess_hours_open_display(&$variables) {
       unset($variables[$row->id]);
     }
   }
-  sort($variables);
+  ksort($variables);
 }
 
 /**
@@ -712,7 +712,7 @@ function template_preprocess_hours_open_display_m(&$variables) {
       unset($variables[$row->id]);
     }
   }
-  sort($variables);
+  ksort($variables);
 }
 
 /**
