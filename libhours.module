@@ -95,7 +95,7 @@ function libhours_menu() {
     'file' => 'libhours.pages.inc',
   );
   $items['hours/m/open'] = array(
-    'title' => 'Now Open - Mobile',
+    'title' => 'Open Now - Mobile',
     'page callback' => 'libhours_open_display_m',
     'access arguments' => array('access content'),
     'file' => 'libhours.pages.inc',
