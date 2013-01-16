@@ -262,8 +262,12 @@ p.libhours-period-name.libhours-daterange {
   text-transform: uppercase;
   width: 290px;
 }
+#libhours-periods li.libhours-label.libhours-emergency {
+  margin-bottom: 5px;  
+}
 #libhours-periods .libhours-exceptions .libhours-hour .libhours-emergency span {
   background-color: red;
+  color: white;
   padding: 3px 5px;
   border-radius: 3px;
 }
