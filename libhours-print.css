@@ -63,6 +63,7 @@ div#libhours-content ul {
 	line-height: .5em;
 }
 #libhours-periods .libhours-stdhours .libhours-location-name {
+  width: 32em;
 	font-size: 1.3em;
 	font-weight: bold;
 	line-height: 0;
