@@ -9,7 +9,7 @@
  */
 
 /**
- * Display the hours page for a giving location
+ * Display the hours page for a given location
  *
  * @param int $lid
  *   Location unique identifier
@@ -22,6 +22,30 @@ function libhours_display($lid = 0, $pid = 0) {
     $conf['cache'] = FALSE;
 
     return theme('hours_display', $lid, $pid);
+}
+
+function libhours_open_display() {
+    global $conf;
+    /* turn off drupal cache for this page */
+    $conf['cache'] = FALSE;
+
+    return theme('hours_open_display');
+}
+
+function libhours_display_m($lid = 0, $pid = 0) {
+    global $conf;
+    /* turn off drupal cache for this page */
+    $conf['cache'] = FALSE;
+
+    return theme('hours_display_m', $lid, $pid);
+}
+
+function libhours_open_display_m() {
+    global $conf;
+    /* turn off drupal cache for this page */
+    $conf['cache'] = FALSE;
+
+    return theme('hours_open_display_m');
 }
 
 /**

@@ -74,32 +74,37 @@ h1.title {margin: 0;}
             <?php endfor; ?>
           </ul>
         </div>
-        <?php if(count($period['exceptions']) > 0 || count($period['emerexceptions']) > 0): ?>
+        <?php if($period['exceptions'] || $period['emerexceptions']): ?>
         <div class="libhours-exceptions">
           <div class="libhours-name"><?php echo t('Exceptions') ?></div>
           <div class="libhours-hour">
             <ul>
+              <?php if($period['emerexceptions']): ?>
               <?php foreach($period['emerexceptions'] as $emerexception): ?>
                 <li class="libhours-label libhours-emergency"><span><?php echo $emerexception['name'] ?></span></li>
                 <?php foreach($emerexception['times'] as $time): ?>
                   <li class="libhours-time"><?php echo $time ?></li>
                 <?php endforeach; ?>
               <?php endforeach; ?>
+              <?php endif; ?>
+              <?php if($period['exceptions']): ?>
               <?php foreach($period['exceptions'] as $exception): ?>
                 <li class="libhours-label"><?php echo $exception['name'] ?></li>
                 <?php foreach($exception['times'] as $time): ?>
                   <li class="libhours-time"><?php echo $time ?></li>
                 <?php endforeach; ?>
               <?php endforeach; ?>
+              <?php endif; ?>
             </ul>
           </div>
         </div>
         <?php endif; ?>
         <div class="libhours-locationdescription"><?php echo $description ?></div>
-        <div class="libhours-disclaimer">
-          		  <?php echo t('In most libraries, the circulation and reserve desks close 15 minutes before the library closes.') ?><br />
-          		  <?php echo t('UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.') ?><br />
-          <strong><?php echo t('Hours are subject to change without notice.') ?></strong>
+        <div class="libhours-footnote">
+          <p>In most libraries, the circulation and reserve desks close 15 minutes before the library closes.</p>
+          <p>UT Libraries are restricted to UT students, faculty and staff between the hours of 10pm and 7am.</p>
+          <p><strong>Hours are subject to change without notice.</strong></p>
+          <p class="summary-pdf"><a href="<?php global $base_path; print $base_path; ?>sites/default/files/hours/utl_hours_summary.pdf">UT Libraries Building Hours Summary (PDF)</a></p>
         </div>
       </div>
     <?php endforeach; ?>

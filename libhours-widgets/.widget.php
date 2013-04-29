@@ -1,4 +1,6 @@
 <?php
+//verybeginning of your page
+$start = microtime(true);
 
 /* Location Variables */
 $locationurl = $_SERVER['REQUEST_URI'];
@@ -56,8 +58,8 @@ function get_content($URL){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_URL, $URL);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+	curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1000);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 1000);
 	curl_setopt($ch, CURLOPT_FAILONERROR, true);
 	$data = curl_exec($ch);
 	curl_close($ch);
@@ -69,7 +71,7 @@ $apihourslocation = "&library=" . $apilibrary;
 $apihoursaction = "&action=hours";
 $apiopenaction = "&action=open";
 $apiformat = "format=json";
-$apiurl = "http://drupal.lib.utexas.edu/hours/api?";
+$apiurl = "http://localhost:8888/d6/hours/api?";
 
 /* JSON Retrieval Variables */
 $hoursurl = $apiurl . $apiformat . $apihourslocation . $apihoursaction;
@@ -95,17 +97,21 @@ if ($decodedopenjson["status"] === 'ok'){
 	while ($i < count($decodedopenjson["locations"])){
 		if ($apilibrary == $decodedopenjson["locations"][$i]["id"]){
 			$libhoursstyle = " class='libhours-header-widget-open'";
-			break;
+			return $libhoursstyle;
 		}
 		elseif ($apilibrary !== $decodedopenjson["locations"][$i]["id"]){
 			$libhoursstyle = " class='libhours-header-widget-closed'";
+			return $libhoursstyle;
 		}
 	$i++;
 	}
-	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date(w)]["hour"] . "</strong></span></a></div>";
+	echo "<div" . $libhoursstyle . " id='libhours-header-widget'><span id='libhours-header-widget-clockicon'>[</span><a href='http://drupal.lib.utexas.edu/hours/" . $apilibrary . "'>" . $locationabbreviation . " Hours Today: <strong>" . $decodedhoursjson["hours"][date("w")]["hour"] . "</strong></span></a></div>";
 } else {
 	echo "<div id='libhours-header-widget' class='libhours-header-widget-error'><span id='libhours-header-widget-clockicon'>[</span><strong><a href='http://drupal.lib.utexas.edu/hours'>Library Hours</a></strong></div>";
 }
 
+//very end of your page
+$end = microtime(true);
+print "Page generated in ".round(($end - $start), 4)." seconds";
 
 ?>
