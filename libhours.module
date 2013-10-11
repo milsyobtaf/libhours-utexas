@@ -272,9 +272,6 @@ function libhours_expand_time($element) {
   }
   /* Purely for ornamentation in the select list */
   $minutes[100]   = '--';
-  /* Need to add in 03 and 07 to specify going into and out of 24 hour time */
-  $minutes[3]  = str_pad(3, 2, 0, STR_PAD_LEFT);
-  $minutes[7]  = str_pad(7, 2, 0, STR_PAD_LEFT);
   /* Need to add in 59 just to specify a closed time of 11:59 pm */
   $minutes[59] = 59;
 
