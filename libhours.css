@@ -50,12 +50,12 @@
   font-weight: bold;
 }
 #libhours-locations #libhours-location-list .libhours-location:hover {
-  color: #efefef;
+  color: #ffffff;
   background-color: #777;
 }
 #libhours-locations #libhours-location-list .libhours-location.selected {
   background-color: #cc5500;
-  color: #efefef;
+  color: #ffffff;
   margin: 2px 0;
 }
 #libhours-locations #libhours-location-list .libhours-location.selected:hover {}
@@ -224,14 +224,14 @@ p.libhours-period-name.libhours-daterange {
   font-size: 1.2em;
   font-weight: bold;
   padding: 4px;
-  width: 129px;
+  width: 95px;
 }
 #libhours-periods .libhours-stdhours .libhours-hour .libhours-time {
   color: #666;
   float: left;
   font-size: 1.2em;
   padding: 4px;
-  width: 177px;
+  width: 215px;
 }
 #libhours-periods .libhours-exceptions {
   background-color: #f9f9f9;
