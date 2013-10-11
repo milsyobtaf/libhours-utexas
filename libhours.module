@@ -270,6 +270,11 @@ function libhours_expand_time($element) {
     $value = str_pad($i, 2, 0, STR_PAD_LEFT);
     $minutes[$value] = $value;
   }
+  /* Purely for ornamentation in the select list */
+  $minutes[100]   = '--';
+  /* Need to add in 03 and 07 to specify going into and out of 24 hour time */
+  $minutes[3]  = str_pad(3, 2, 0, STR_PAD_LEFT);
+  $minutes[7]  = str_pad(7, 2, 0, STR_PAD_LEFT);
   /* Need to add in 59 just to specify a closed time of 11:59 pm */
   $minutes[59] = 59;
 
@@ -801,12 +806,49 @@ function _libhours_dowstring($dow) {
 function _libhours_displayhours($open, $close, $prev = NULL, $next = NULL) {
   $openstr = _libhours_parsetime($open);
   $closestr = _libhours_parsetime($close);
-
+/* Special cases for 24 hour time */
   if ($open == 0 && $close == 2359) {
     $r = t('Open 24 hours');
   }
   elseif ($open == 0 && $close == 0) {
     $r = t('Closed');
+  }
+/* Special cases for coming into or out of 24 hour time */
+  elseif ($open == 2359 && $close == 1200) {
+    $r = t('Closes at Noon', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($open == 2359 && $close == 0) {
+    $r = t('Closes at Midnight', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($open == 0 && $close == 2359) {
+    $r = t('Opens at Midnight', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($open == 1200 && $close == 2359) {
+    $r = t('Opens at Noon', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($open == 2359) {
+    $r = t('Closes at @closetime', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
+  }
+  elseif ($close == 2359) {
+    $r = t('Opens at @opentime', array(
+      '@opentime' => $openstr,
+      '@closetime' => $closestr,
+    ));
   }
 /* Begin special cases for Noon and Midnight to avoid confusion */  
 /* Begin two very specific time declaration to get around a bug caused by the $open and $close both equaling special cases */
@@ -823,7 +865,7 @@ function _libhours_displayhours($open, $close, $prev = NULL, $next = NULL) {
     )); 
  }
 /* End two very specific time declaration to get around a bug caused by the $open and $close both equaling special cases */
- elseif ($open == 0) {
+  elseif ($open == 0) {
     $r = t('Midnight - @closetime', array(
       '@opentime' => $openstr,
       '@closetime' => $closestr,
