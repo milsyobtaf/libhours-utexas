@@ -97,6 +97,7 @@
       </div>
     <?php endforeach; ?>
 <?php endif; ?>
+  <div class="libhours-locationdescription-m"><?php echo $description ?></div>
   <table id="libhours-navigation-m">
     <tr>
       <td><a href="<?php global $base_path; print $base_path; ?>hours/m/open">Open Now</a></td>
