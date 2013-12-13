@@ -299,7 +299,8 @@ p.libhours-location-name-m,
 p.libhours-location-childname-m,
 p.libhours-period-name-m,
 div.libhours-stdhours-m,
-table.libhours-exceptions-m {
+table.libhours-exceptions-m,
+.libhours-locationdescription-m p {
   padding: .3em 0;
   margin: 0;
 }
